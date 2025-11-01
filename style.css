@@ -1,0 +1,35 @@
+ :root {
+     --primary-black: #121212;
+     --secondary-black: #1e1e1e;
+     --accent-green: #1db954;
+     --light-green: #1ed760;
+     --text-white: #ffffff;
+     --text-gray: #b3b3b3;
+ }
+
+body {
+    font-size: 15pt;
+}
+
+.divider {
+    text-align: center;
+    margin: 25px 0;
+    position: relative;
+    color: var(--text-gray);
+}
+
+.divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #333;
+}
+
+ .divider span {
+            background-color: var(--secondary-black);
+            padding: 0 15px;
+            position: relative;
+ }

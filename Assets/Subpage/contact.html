@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="Assets\image\logo\20240428_221650.png" rel="icon">
+  <link href="Assets\image\logo\20240428_221650.png" rel="20240428_221650.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Planet Play</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-black: #121212;
+            --secondary-black: #1e1e1e;
+            --accent-green: #1db954;
+            --light-green: #1ed760;
+            --text-white: #ffffff;
+            --text-gray: #b3b3b3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--primary-black);
+            color: var(--text-white);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--secondary-black);
+            padding: 20px 0;
+            border-bottom: 2px solid var(--accent-green);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--accent-green), var(--light-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .logo-icon {
+            font-size: 24px;
+            color: var(--accent-green);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: var(--text-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--accent-green);
+        }
+        
+        /* Login/Signup Section */
+        .auth-section {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            gap: 15px;
+        }
+        
+        .auth-btn {
+            background-color: transparent;
+            color: var(--text-white);
+            border: 1px solid var(--accent-green);
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .auth-btn:hover {
+            background-color: var(--accent-green);
+            color: var(--primary-black);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: var(--text-gray);
+        }
+        
+        /* Contact Section */
+        .contact-page {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 36px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-green);
+            margin: 15px auto;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        
+        .contact-info {
+            background-color: var(--secondary-black);
+            border-radius: 10px;
+            padding: 40px;
+            border: 1px solid #333;
+        }
+        
+        .contact-info h3 {
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: var(--accent-green);
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .contact-details h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .contact-details p {
+            color: var(--text-gray);
+        }
+        
+        .business-hours {
+            margin-top: 30px;
+        }
+        
+        .business-hours h4 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--accent-green);
+        }
+        
+        .hours-list {
+            list-style: none;
+        }
+        
+        .hours-list li {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .hours-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .day {
+            color: var(--text-white);
+        }
+        
+        .time {
+            color: var(--text-gray);
+        }
+        
+        /* Contact Form */
+        .contact-form {
+            background-color: var(--secondary-black);
+            border-radius: 10px;
+            padding: 40px;
+            border: 1px solid #333;
+        }
+        
+        .contact-form h3 {
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: var(--accent-green);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: var(--primary-black);
+            border: 1px solid #333;
+            border-radius: 5px;
+            color: var(--text-white);
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-green);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .submit-btn {
+            background-color: var(--accent-green);
+            color: var(--primary-black);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--light-green);
+        }
+        
+        /* Partnership Types */
+        .partnership-types {
+            margin-top: 60px;
+        }
+        
+        .partnership-types h3 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 28px;
+            color: var(--accent-green);
+        }
+        
+        .types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .type-card {
+            background-color: var(--secondary-black);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid #333;
+            transition: transform 0.3s;
+        }
+        
+        .type-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .type-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--accent-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 24px;
+        }
+        
+        .type-card h4 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--accent-green);
+        }
+        
+        .type-card p {
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary-black);
+            padding: 40px 0;
+            border-top: 2px solid var(--accent-green);
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--accent-green);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-green);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-white);
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--accent-green);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+            
+            .hero h2 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .auth-section {
+                position: static;
+                justify-content: center;
+                margin-bottom: 15px;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .types-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+       <div class="container">
+            <div class="auth-section"><a href="/Assets/ backend/authentication/user-portal.html">
+                <button class="auth-btn">Login</button>
+                <button class="auth-btn">Sign Up</button></a>
+            </div>
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">♫</span>
+                    <h1>Planet Play</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="/index.html" >Home</a></li>
+                        <li><a href="/Assets/Subpage/platforms.html">Platforms</a></li>
+                        <li><a href="/Assets/Subpage/playlist.html">Playlists</a></li>
+                        <li><a href="/Assets/Subpage/artist-lebel.html">Artists</a></li>
+                        <li><a href="/Assets/Subpage/contact.html" class="active">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Get In Touch</h2>
+            <p>Ready to partner with Planet Play? We're excited to hear from you and explore opportunities for collaboration, advertising, and business partnerships.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-page">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            
+            <div class="contact-container">
+                <!-- Contact Information -->
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Our Office</h4>
+                            <p>123 Music Avenue<br>Sound City, SC 10001<br>United States</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Phone Number</h4>
+                            <p>+1 (555) 123-4567</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email Address</h4>
+                            <p>partnerships@planetplay.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="business-hours">
+                        <h4>Business Hours</h4>
+                        <ul class="hours-list">
+                            <li>
+                                <span class="day">Monday - Friday</span>
+                                <span class="time">9:00 AM - 6:00 PM</span>
+                            </li>
+                            <li>
+                                <span class="day">Saturday</span>
+                                <span class="time">10:00 AM - 4:00 PM</span>
+                            </li>
+                            <li>
+                                <span class="day">Sunday</span>
+                                <span class="time">Closed</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="contact-form">
+                    <h3>Partnership Inquiry Form</h3>
+                    <form id="partnership-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="first-name">First Name *</label>
+                                <input type="text" id="first-name" name="first-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="last-name">Last Name *</label>
+                                <input type="text" id="last-name" name="last-name" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="company">Company / Organization</label>
+                                <input type="text" id="company" name="company">
+                            </div>
+                            <div class="form-group">
+                                <label for="position">Your Position</label>
+                                <input type="text" id="position" name="position">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="inquiry-type">Type of Inquiry *</label>
+                            <select id="inquiry-type" name="inquiry-type" required>
+                                <option value="">Select an option</option>
+                                <option value="partnership">Strategic Partnership</option>
+                                <option value="collaboration">Content Collaboration</option>
+                                <option value="advertising">Advertising Opportunity</option>
+                                <option value="sponsorship">Event Sponsorship</option>
+                                <option value="investment">Investment Opportunity</option>
+                                <option value="other">Other Business Inquiry</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="budget">Estimated Budget (if applicable)</label>
+                            <select id="budget" name="budget">
+                                <option value="">Select an option</option>
+                                <option value="under-5k">Under $5,000</option>
+                                <option value="5k-10k">$5,000 - $10,000</option>
+                                <option value="10k-25k">$10,000 - $25,000</option>
+                                <option value="25k-50k">$25,000 - $50,000</option>
+                                <option value="50k-100k">$50,000 - $100,000</option>
+                                <option value="over-100k">Over $100,000</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="timeline">Project Timeline</label>
+                            <select id="timeline" name="timeline">
+                                <option value="">Select an option</option>
+                                <option value="immediate">Immediate (Within 1 month)</option>
+                                <option value="short-term">Short-term (1-3 months)</option>
+                                <option value="medium-term">Medium-term (3-6 months)</option>
+                                <option value="long-term">Long-term (6+ months)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Project Details / Message *</label>
+                            <textarea id="message" name="message" placeholder="Please describe your partnership proposal, collaboration idea, or business inquiry in detail..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Submit Partnership Inquiry</button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Partnership Types -->
+            <div class="partnership-types">
+                <h3>Partnership Opportunities</h3>
+                <div class="types-grid">
+                    <div class="type-card">
+                        <div class="type-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h4>Strategic Partnerships</h4>
+                        <p>Join forces with Planet Play for mutually beneficial collaborations that expand reach and create value for both parties.</p>
+                    </div>
+                    
+                    <div class="type-card">
+                        <div class="type-icon">
+                            <i class="fas fa-music"></i>
+                        </div>
+                        <h4>Content Collaboration</h4>
+                        <p>Co-create playlists, exclusive content, or special editions with our platform to reach new audiences.</p>
+                    </div>
+                    
+                    <div class="type-card">
+                        <div class="type-icon">
+                            <i class="fas fa-ad"></i>
+                        </div>
+                        <h4>Advertising</h4>
+                        <p>Promote your brand, product, or service to our engaged music-loving audience across all platforms.</p>
+                    </div>
+                    
+                    <div class="type-card">
+                        <div class="type-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h4>Event Sponsorship</h4>
+                        <p>Partner with us for music events, festivals, or exclusive listening parties to connect with our community.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Planet Play</h3>
+                    <p>Aggregating music across all platforms to deliver the perfect listening experience.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="platforms.html">Platforms</a></li>
+                        <li><a href="playlists.html">Playlists</a></li>
+                        <li><a href="artists.html">Artists</a></li>
+                        <li><a href="contact.html" class="active">Contact</a></li>
+                    </ul>
+                </div>
+               <div class="footer-section">
+    <h3>Quick Links</h3>
+    <ul class="footer-links">
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/Assets/Subpage/platforms.html">Platforms</a></li>
+        <li><a href="/Assets/Subpage/playlist.html">Playlists</a></li>
+        <li><a href="/Assets/Subpage/artist-lebel.html">Artists</a></li>
+        <li><a href="/Assets/Subpage/contact.html">Contact</a></li>
+    </ul>
+</div>
+                <div class="footer-section">
+    <h3>Contact Us</h3>
+    <ul class="footer-links">
+        <li>Email: planetplay.inc@gmail.com</li>
+        <li>Phone: +234 9026394593</li>
+        <!--   <li>Address: 123 Music Ave, Sound City</li> -->
+    </ul>
+</div>
+</div>
+<div class="copyright">
+    <p>&copy; 2023 Colony core. All rights reserved.</p>
+</div>
+</div>
+    </footer>
+
+    <script>
+        // Form submission handling
+        document.addEventListener('DOMContentLoaded', function() {
+            const partnershipForm = document.getElementById('partnership-form');
+            
+            partnershipForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const formData = new FormData(partnershipForm);
+                const formObject = {};
+                formData.forEach((value, key) => {
+                    formObject[key] = value;
+                });
+                
+                // In a real application, you would send this data to a server
+                console.log('Form submitted:', formObject);
+                
+                // Show success message
+                alert('Thank you for your partnership inquiry! We will review your submission and get back to you within 2-3 business days.');
+                
+                // Reset form
+                partnershipForm.reset();
+            });
+            
+            // Login/Signup button functionality
+            const authButtons = document.querySelectorAll('.auth-btn');
+            authButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const action = this.textContent;
+                    alert(`${action} functionality would be implemented here`);
+                });
+            });
+        });
+    </script>
+    <script src="/Assets/pageloader/all-in-one.js"></script>
+</body>
+</html>

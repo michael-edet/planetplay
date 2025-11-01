@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planet Play - Integrated Example</title>
+    <link rel="stylesheet" href="loader.css">
+    <style>
+        /* Your main website styles */
+        .main-content {
+            padding: 50px;
+            text-align: center;
+            background: #121212;
+            color: white;
+            min-height: 100vh;
+        }
+        
+        h1 {
+            color: #1db954;
+            margin-bottom: 20px;
+        }
+        
+        p {
+            color: #b3b3b3;
+            margin-bottom: 30px;
+        }
+        
+        button {
+            background: #1db954;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #1ed760;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader Container -->
+    <div class="loader-container">
+        <div class="logo-container">
+            <div class="pulse-ring"></div>
+            <div class="pulse-ring"></div>
+            <div class="pulse-ring"></div>
+            <div class="logo-placeholder">
+                <!-- Replace with your actual logo -->
+                <span class="logo-text">PLANET PLAY</span>
+            </div>
+        </div>
+        
+        <div class="loading-dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+        
+        <div class="loading-text">LOADING</div>
+        
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+    </div>
+
+    <!-- Your Main Website Content -->
+    <div class="main-content">
+        <h1>Welcome to Planet Play</h1>
+        <p>Your music aggregation platform is now ready!</p>
+        <p>This content appears after the loader finishes.</p>
+        <button onclick="simulateNavigation()">Simulate Page Navigation</button>
+    </div>
+
+    <script src="loader.js"></script>
+    <script>
+        // Example of using the loader during navigation
+        function simulateNavigation() {
+            // Show loader
+            document.body.classList.remove('loaded');
+            
+            // Simulate navigation delay
+            setTimeout(function() {
+                alert('Navigation complete!');
+                document.body.classList.add('loaded');
+            }, 2000);
+        }
+        
+        // Customize logo with your image
+        window.addEventListener('load', function() {
+            // Replace the logo placeholder with your actual logo
+            // Uncomment and modify the line below with your logo path
+            /*
+            const logoPlaceholder = document.querySelector('.logo-placeholder');
+            logoPlaceholder.innerHTML = '<img src="path-to-your-logo.png" alt="Planet Play Logo" style="width: 80%; height: 80%; object-fit: contain;">';
+            */
+        });
+    </script>
+</body>
+</html>

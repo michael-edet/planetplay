@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artist Portal | Planet Play</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-black: #121212;
+            --secondary-black: #1e1e1e;
+            --accent-green: #1db954;
+            --light-green: #1ed760;
+            --text-white: #ffffff;
+            --text-gray: #b3b3b3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--primary-black);
+            color: var(--text-white);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--secondary-black);
+            padding: 20px 0;
+            border-bottom: 2px solid var(--accent-green);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--accent-green), var(--light-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .logo-icon {
+            font-size: 24px;
+            color: var(--accent-green);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: var(--text-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--accent-green);
+        }
+        
+        /* Auth Section Styles */
+        .auth-container {
+            display: flex;
+            min-height: calc(100vh - 200px);
+            align-items: center;
+            justify-content: center;
+            padding: 40px 0;
+        }
+        
+        .auth-box {
+            background-color: var(--secondary-black);
+            border-radius: 10px;
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+            border: 1px solid #333;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .auth-tab {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .auth-tab.active {
+            color: var(--accent-green);
+            border-bottom: 3px solid var(--accent-green);
+        }
+        
+        .auth-form {
+            display: none;
+        }
+        
+        .auth-form.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .form-title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: var(--primary-black);
+            border: 1px solid #333;
+            border-radius: 5px;
+            color: var(--text-white);
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-green);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .checkbox-group input {
+            margin-top: 5px;
+        }
+        
+        .checkbox-group label {
+            font-size: 14px;
+            color: var(--text-gray);
+        }
+        
+        .checkbox-group a {
+            color: var(--accent-green);
+            text-decoration: none;
+        }
+        
+        .checkbox-group a:hover {
+            text-decoration: underline;
+        }
+        
+        .submit-btn {
+            background-color: var(--accent-green);
+            color: var(--primary-black);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--light-green);
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 25px 0;
+            position: relative;
+            color: var(--text-gray);
+        }
+        
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: #333;
+        }
+        
+        .divider span {
+            background-color: var(--secondary-black);
+            padding: 0 15px;
+            position: relative;
+        }
+        
+        .social-login {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .social-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            background-color: var(--primary-black);
+            color: var(--text-white);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .social-btn:hover {
+            background-color: #2a2a2a;
+        }
+        
+        .auth-footer {
+            text-align: center;
+            margin-top: 25px;
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+        
+        .auth-footer a {
+            color: var(--accent-green);
+            text-decoration: none;
+        }
+        
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .forgot-password {
+            text-align: right;
+            margin-top: -10px;
+            margin-bottom: 20px;
+        }
+        
+        .forgot-password a {
+            color: var(--accent-green);
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Artist Benefits Section */
+        .artist-benefits {
+            background-color: var(--secondary-black);
+            padding: 60px 0;
+            margin-top: auto;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .benefit-card {
+            text-align: center;
+            padding: 30px 20px;
+        }
+        
+        .benefit-icon {
+            width: 70px;
+            height: 70px;
+            background-color: var(--accent-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 28px;
+        }
+        
+        .benefit-card h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--accent-green);
+        }
+        
+        .benefit-card p {
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary-black);
+            padding: 40px 0;
+            border-top: 2px solid var(--accent-green);
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--accent-green);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-green);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-white);
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--accent-green);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+            
+            .auth-box {
+                padding: 30px 20px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .social-login {
+                flex-direction: column;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+       <div class="container">
+           <!-- <div class="auth-section"><a href="/Assets/ backend/authentication/user-portal.html">
+                <button class="auth-btn">Login</button>
+                <button class="auth-btn">Sign Up</button></a>
+            </div> -->
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">♫</span>
+                    <h1>Planet Play</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="/index.html" >Home</a></li>
+                        <li><a href="/Assets/Subpage/platforms.html">Platforms</a></li>
+                        <li><a href="/Assets/Subpage/playlist.html">Playlists</a></li>
+                        <li><a href="/Assets/Subpage/artist-lebel.html">Artists</a></li>
+                        <li><a href="/Assets/Subpage/contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Auth Container -->
+    <section class="auth-container">
+        <div class="container">
+            <div class="auth-box">
+                <div class="auth-tabs">
+                    <div class="auth-tab active" data-tab="login">Login</div>
+                    <div class="auth-tab" data-tab="signup">Sign Up</div>
+                </div>
+                
+                <!-- Login Form -->
+                <div class="auth-form active" id="login-form">
+                    <h2 class="form-title">Artist/Label Login</h2>
+                    
+                    <div class="social-login">
+                        <button class="social-btn">
+                            <i class="fab fa-google"></i>
+                            <span>Google</span>
+                        </button>
+                        <button class="social-btn">
+                            <i class="fab fa-apple"></i>
+                            <span>Apple</span>
+                        </button>
+                    </div>
+                    
+                    <div class="divider">
+                        <span>or</span>
+                    </div>
+                    
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="login-email">Email Address</label>
+                            <input type="email" id="login-email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="login-password">Password</label>
+                            <input type="password" id="login-password" name="password" required>
+                        </div>
+                        
+                        <div class="forgot-password">
+                            <a href="#">Forgot your password?</a>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Login to Your Account</button>
+                    </form>
+                    
+                    <div class="auth-footer">
+                        Don't have an account? <a href="#" class="switch-to-signup">Sign up here</a>
+                    </div>
+                </div>
+                
+                <!-- Signup Form -->
+                <div class="auth-form" id="signup-form">
+                    <h2 class="form-title">Artist/Label Sign Up</h2>
+                    
+                    <div class="social-login">
+                        <button class="social-btn">
+                            <i class="fab fa-google"></i>
+                            <span>Google</span>
+                        </button>
+                        <button class="social-btn">
+                            <i class="fab fa-apple"></i>
+                            <span>Apple</span>
+                        </button>
+                    </div>
+                    
+                    <div class="divider">
+                        <span>or</span>
+                    </div>
+                    
+                    <form id="signupForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="first-name">First Name</label>
+                                <input type="text" id="first-name" name="first-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="last-name">Last Name</label>
+                                <input type="text" id="last-name" name="last-name" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="signup-email">Email Address</label>
+                            <input type="email" id="signup-email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="artist-name">Artist / Band Name</label>
+                            <input type="text" id="artist-name" name="artist-name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="account-type">Account Type</label>
+                            <select id="account-type" name="account-type" required>
+                                <option value="">Select account type</option>
+                                <option value="solo-artist">Solo Artist</option>
+                                <option value="band">Band</option>
+                                <option value="record-label">Record Label</option>
+                                <option value="music-producer">Music Producer</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="primary-genre">Primary Genre</label>
+                            <select id="primary-genre" name="primary-genre" required>
+                                <option value="">Select your primary genre</option>
+                                <option value="pop">Pop</option>
+                                <option value="rock">Rock</option>
+                                <option value="hip-hop">Hip Hop</option>
+                                <option value="r&b">R&B</option>
+                                <option value="electronic">Electronic</option>
+                                <option value="jazz">Jazz</option>
+                                <option value="classical">Classical</option>
+                                <option value="country">Country</option>
+                                <option value="reggae">Reggae</option>
+                                <option value="afrobeats">Afrobeats</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="signup-password">Password</label>
+                                <input type="password" id="signup-password" name="password" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-password">Confirm Password</label>
+                                <input type="password" id="confirm-password" name="confirm-password" required>
+                            </div>
+                        </div>
+                        
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="terms" name="terms" required>
+                            <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                        </div>
+                        
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="newsletter" name="newsletter">
+                            <label for="newsletter">Send me updates about new features and opportunities</label>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Create Artist Account</button>
+                    </form>
+                    
+                    <div class="auth-footer">
+                        Already have an account? <a href="#" class="switch-to-login">Login here</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Artist Benefits Section -->
+    <section class="artist-benefits">
+        <div class="container">
+            <h2 class="section-title" style="text-align: center; margin-bottom: 50px; font-size: 36px; position: relative;">
+                Why Join Planet Play?
+                <div style="content: ''; display: block; width: 80px; height: 3px; background-color: var(--accent-green); margin: 15px auto;"></div>
+            </h2>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Global Distribution</h3>
+                    <p>Reach listeners on all major streaming platforms worldwide with a single upload.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Detailed Analytics</h3>
+                    <p>Track your performance across all platforms with comprehensive analytics and insights.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3>Maximize Revenue</h3>
+                    <p>Earn from all streaming platforms and optimize your revenue with our smart distribution.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-headphones"></i>
+                    </div>
+                    <h3>Playlist Placement</h3>
+                    <p>Get your music featured on curated playlists across all major streaming services.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Planet Play</h3>
+                    <p>Aggregating music across all platforms to deliver the perfect listening experience.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="platforms.html">Platforms</a></li>
+                        <li><a href="playlists.html">Playlists</a></li>
+                        <li><a href="artists.html">Artists</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+    <h3>Quick Links</h3>
+    <ul class="footer-links">
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/Assets/Subpage/platforms.html">Platforms</a></li>
+        <li><a href="/Assets/Subpage/playlist.html">Playlists</a></li>
+        <li><a href="/Assets/Subpage/artist-lebel.html">Artists</a></li>
+        <li><a href="/Assets/Subpage/contact.html">Contact</a></li>
+    </ul>
+</div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li>Email: planetplay.inc@gmail.com</li>
+                        <li>Phone: +234 9026394593</li>
+                     <!--   <li>Address: 123 Music Ave, Sound City</li> -->
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Colony core. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab switching functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const authTabs = document.querySelectorAll('.auth-tab');
+            const authForms = document.querySelectorAll('.auth-form');
+            const switchToSignupLinks = document.querySelectorAll('.switch-to-signup');
+            const switchToLoginLinks = document.querySelectorAll('.switch-to-login');
+            
+            // Tab click event
+            authTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const targetTab = this.getAttribute('data-tab');
+                    
+                    // Update active tab
+                    authTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show corresponding form
+                    authForms.forEach(form => {
+                        form.classList.remove('active');
+                        if (form.id === `${targetTab}-form`) {
+                            form.classList.add('active');
+                        }
+                    });
+                });
+            });
+            
+            // Switch to signup from login footer
+            switchToSignupLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    authTabs.forEach(t => t.classList.remove('active'));
+                    document.querySelector('.auth-tab[data-tab="signup"]').classList.add('active');
+                    
+                    authForms.forEach(form => {
+                        form.classList.remove('active');
+                        if (form.id === 'signup-form') {
+                            form.classList.add('active');
+                        }
+                    });
+                });
+            });
+            
+            // Switch to login from signup footer
+            switchToLoginLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    authTabs.forEach(t => t.classList.remove('active'));
+                    document.querySelector('.auth-tab[data-tab="login"]').classList.add('active');
+                    
+                    authForms.forEach(form => {
+                        form.classList.remove('active');
+                        if (form.id === 'login-form') {
+                            form.classList.add('active');
+                        }
+                    });
+                });
+            });
+            
+            // Form submission
+            const loginForm = document.getElementById('loginForm');
+            const signupForm = document.getElementById('signupForm');
+            
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const formData = new FormData(loginForm);
+                const formObject = {};
+                formData.forEach((value, key) => {
+                    formObject[key] = value;
+                });
+                
+                // In a real application, you would send this data to a server
+                console.log('Login form submitted:', formObject);
+                
+                // Show success message
+                alert('Login successful! Redirecting to your artist dashboard...');
+                
+                // In a real application, you would redirect to the dashboard
+                // window.location.href = 'artist-dashboard.html';
+            });
+            
+            signupForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const formData = new FormData(signupForm);
+                const formObject = {};
+                formData.forEach((value, key) => {
+                    formObject[key] = value;
+                });
+                
+                // Check if passwords match
+                const password = document.getElementById('signup-password').value;
+                const confirmPassword = document.getElementById('confirm-password').value;
+                
+                if (password !== confirmPassword) {
+                    alert('Passwords do not match. Please try again.');
+                    return;
+                }
+                
+                // In a real application, you would send this data to a server
+                console.log('Signup form submitted:', formObject);
+                
+                // Show success message
+                alert('Account created successfully! Welcome to Planet Play. You can now submit your music.');
+                
+                // In a real application, you would redirect to the dashboard or submission page
+                // window.location.href = 'submit-music.html';
+            });
+            
+            // Social login buttons
+            const socialButtons = document.querySelectorAll('.social-btn');
+            socialButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const platform = this.querySelector('span').textContent;
+                    alert(`${platform} authentication would be implemented here`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
