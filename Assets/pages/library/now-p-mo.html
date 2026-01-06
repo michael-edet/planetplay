@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <title>Now Playing | Planet Play</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-black: #121212;
+            --secondary-black: #1e1e1e;
+            --accent-green: #1db954;
+            --light-green: #1ed760;
+            --text-white: #ffffff;
+            --text-gray: #b3b3b3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--primary-black);
+            color: var(--text-white);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--secondary-black);
+            padding: 20px 0;
+            border-bottom: 2px solid var(--accent-green);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--accent-green), var(--light-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .logo-icon {
+            font-size: 24px;
+            color: var(--accent-green);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: var(--text-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--accent-green);
+        }
+        
+        /* Now Playing Section */
+        .now-playing-section {
+            flex: 1;
+            padding: 60px 0;
+            background: linear-gradient(135deg, rgba(29, 185, 84, 0.1) 0%, rgba(18, 18, 18, 1) 100%);
+        }
+        
+        .now-playing-container {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .album-art-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .album-art {
+            width: 350px;
+            height: 350px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #1db954, #1ed760);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .album-art::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+        }
+        
+        .vinyl-record {
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #121212 30%, #333 100%);
+            position: relative;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: rotate 20s linear infinite;
+            animation-play-state: paused;
+        }
+        
+        .vinyl-record.playing {
+            animation-play-state: running;
+        }
+        
+        .vinyl-center {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1db954, #1ed760);
+            position: absolute;
+            z-index: 2;
+        }
+        
+        .vinyl-lines {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: repeating-radial-gradient(
+                circle,
+                transparent,
+                transparent 5px,
+                rgba(255, 255, 255, 0.1) 5px,
+                rgba(255, 255, 255, 0.1) 6px
+            );
+        }
+        
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .track-info {
+            flex: 1;
+        }
+        
+        .track-meta {
+            margin-bottom: 30px;
+        }
+        
+        .track-title {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, var(--accent-green), var(--light-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .track-artist {
+            font-size: 24px;
+            color: var(--text-gray);
+            margin-bottom: 5px;
+        }
+        
+        .track-album {
+            font-size: 18px;
+            color: var(--text-gray);
+        }
+        
+        .progress-container {
+            margin-bottom: 30px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background-color: #333;
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
+            margin-bottom: 10px;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: var(--accent-green);
+            border-radius: 3px;
+            width: 35%;
+            transition: width 0.1s;
+        }
+        
+        .progress-time {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+        
+        .player-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        
+        .control-buttons {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+        
+        .control-btn {
+            background: none;
+            border: none;
+            color: var(--text-white);
+            cursor: pointer;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        
+        .control-btn:hover {
+            color: var(--accent-green);
+        }
+        
+        .control-btn.active {
+            color: var(--accent-green);
+        }
+        
+        .play-pause {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: var(--accent-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-black);
+            font-size: 24px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        
+        .play-pause:hover {
+            background-color: var(--light-green);
+            transform: scale(1.05);
+        }
+        
+        .extra-controls {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .action-btn {
+            background: none;
+            border: none;
+            color: var(--text-gray);
+            cursor: pointer;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+        
+        .action-btn:hover {
+            color: var(--text-white);
+        }
+        
+        .action-btn.active {
+            color: var(--accent-green);
+        }
+        
+        .volume-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .volume-bar {
+            width: 150px;
+            height: 4px;
+            background-color: #333;
+            border-radius: 2px;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .volume-level {
+            height: 100%;
+            background-color: var(--accent-green);
+            border-radius: 2px;
+            width: 70%;
+        }
+        
+        /* Track Details */
+        .track-details {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+        }
+        
+        .detail-item {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        
+        .detail-label {
+            width: 120px;
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+        
+        .detail-value {
+            flex: 1;
+            font-size: 14px;
+        }
+        
+        /* Up Next Section */
+        .up-next {
+            margin-top: 60px;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .up-next-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .up-next-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.05);
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+        
+        .up-next-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .up-next-art {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+        }
+        
+        .up-next-info {
+            flex: 1;
+        }
+        
+        .up-next-title {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        
+        .up-next-artist {
+            font-size: 14px;
+            color: var(--text-gray);
+        }
+        
+        .up-next-duration {
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary-black);
+            padding: 40px 0;
+            border-top: 2px solid var(--accent-green);
+            margin-top: auto;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--accent-green);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-green);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-white);
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--accent-green);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .now-playing-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .album-art {
+                width: 280px;
+                height: 280px;
+            }
+            
+            .vinyl-record {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .track-title {
+                font-size: 36px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+            
+            .player-controls {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .control-buttons {
+                order: 2;
+            }
+            
+            .extra-controls {
+                order: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">♫</span>
+                    <h1>Planet Play</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="/index.html">Home</a></li>
+                        <li><a href="/Assets/Subpage/platforms.html">Platforms</a></li>
+                        <li><a href="/Assets/Subpage/playlist.html">Playlists</a></li>
+                        <li><a href="/Assets/Subpage/artist-lebel.html">Artists</a></li>
+                        <li><a href="/Assets/Subpage/billboard.html">Billboard</a></li>
+                        <li><a href="/Assets/Subpage/music-player.html">Player</a></li>
+                        <li><a href="/Assets/Subpage/now-playing.html" class="active">Now Playing</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Now Playing Section -->
+    <section class="now-playing-section">
+        <div class="container">
+            <div class="now-playing-container">
+                <div class="album-art-container">
+                    <div class="album-art">
+                        <div class="vinyl-record playing" id="vinyl-record">
+                            <div class="vinyl-lines"></div>
+                            <div class="vinyl-center"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="track-info">
+                    <div class="track-meta">
+                        <h1 class="track-title">Midnight Dreams</h1>
+                        <div class="track-artist">Maria Johnson</div>
+                        <div class="track-album">From the album "Nocturnal"</div>
+                    </div>
+                    
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progress-bar">
+                            <div class="progress" id="progress"></div>
+                        </div>
+                        <div class="progress-time">
+                            <span id="current-time">1:24</span>
+                            <span id="duration">3:45</span>
+                        </div>
+                    </div>
+                    
+                    <div class="player-controls">
+                        <div class="control-buttons">
+                            <button class="control-btn" id="shuffle-btn" title="Shuffle">
+                                <i class="fas fa-random"></i>
+                            </button>
+                            <button class="control-btn" id="prev-btn" title="Previous">
+                                <i class="fas fa-step-backward"></i>
+                            </button>
+                            <button class="play-pause" id="play-pause-btn">
+                                <i class="fas fa-pause" id="play-icon"></i>
+                            </button>
+                            <button class="control-btn" id="next-btn" title="Next">
+                                <i class="fas fa-step-forward"></i>
+                            </button>
+                            <button class="control-btn" id="repeat-btn" title="Repeat">
+                                <i class="fas fa-redo"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="extra-controls">
+                            <button class="action-btn active" id="like-btn" title="Like">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                            <button class="action-btn" id="add-btn" title="Add to playlist">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <button class="action-btn" id="share-btn" title="Share">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="volume-controls">
+                        <button class="control-btn" id="volume-btn" title="Volume">
+                            <i class="fas fa-volume-up"></i>
+                        </button>
+                        <div class="volume-bar" id="volume-bar">
+                            <div class="volume-level" id="volume-level"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="track-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Genre:</div>
+                            <div class="detail-value">Pop / Electronic</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Released:</div>
+                            <div class="detail-value">June 15, 2023</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Label:</div>
+                            <div class="detail-value">Rhythm Records</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">BPM:</div>
+                            <div class="detail-value">120</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Up Next Section -->
+            <div class="up-next">
+                <h2 class="section-title">Up Next</h2>
+                <div class="up-next-list">
+                    <div class="up-next-item">
+                        <div class="up-next-art">
+                            <i class="fas fa-music"></i>
+                        </div>
+                        <div class="up-next-info">
+                            <div class="up-next-title">Ocean Breeze</div>
+                            <div class="up-next-artist">Sarah Green</div>
+                        </div>
+                        <div class="up-next-duration">4:12</div>
+                    </div>
+                    
+                    <div class="up-next-item">
+                        <div class="up-next-art">
+                            <i class="fas fa-music"></i>
+                        </div>
+                        <div class="up-next-info">
+                            <div class="up-next-title">Urban Legends</div>
+                            <div class="up-next-artist">Kyle Thompson</div>
+                        </div>
+                        <div class="up-next-duration">3:28</div>
+                    </div>
+                    
+                    <div class="up-next-item">
+                        <div class="up-next-art">
+                            <i class="fas fa-music"></i>
+                        </div>
+                        <div class="up-next-info">
+                            <div class="up-next-title">Neon Lights</div>
+                            <div class="up-next-artist">DJ Pulse</div>
+                        </div>
+                        <div class="up-next-duration">6:15</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Planet Play</h3>
+                    <p>Aggregating music across all platforms to deliver the perfect listening experience.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="/index.html">Home</a></li>
+                        <li><a href="/Assets/Subpage/platforms.html">Platforms</a></li>
+                        <li><a href="/Assets/Subpage/playlist.html">Playlists</a></li>
+                        <li><a href="/Assets/Subpage/artist-lebel.html">Artists</a></li>
+                        <li><a href="/Assets/Subpage/billboard.html">Billboard</a></li>
+                        <li><a href="/Assets/Subpage/music-player.html">Player</a></li>
+                        <li><a href="/Assets/Subpage/now-playing.html" class="active">Now Playing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Platforms</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Spotify</a></li>
+                        <li><a href="#">Apple Music</a></li>
+                        <li><a href="#">Deezer</a></li>
+                        <li><a href="#">Tidal</a></li>
+                        <li><a href="#">SoundCloud</a></li>
+                        <li><a href="#">YouTube Music</a></li>
+                        <li><a href="#">Boomplay</a></li>
+                        <li><a href="#">Audiomack</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li>Email: planetplay.inc@gmail.com</li>
+                        <li>Phone: +234 9026394593</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Colony core. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Player elements
+            const playPauseBtn = document.getElementById('play-pause-btn');
+            const playIcon = document.getElementById('play-icon');
+            const progress = document.getElementById('progress');
+            const progressBar = document.getElementById('progress-bar');
+            const currentTimeEl = document.getElementById('current-time');
+            const durationEl = document.getElementById('duration');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const shuffleBtn = document.getElementById('shuffle-btn');
+            const repeatBtn = document.getElementById('repeat-btn');
+            const volumeBtn = document.getElementById('volume-btn');
+            const volumeBar = document.getElementById('volume-bar');
+            const volumeLevel = document.getElementById('volume-level');
+            const vinylRecord = document.getElementById('vinyl-record');
+            const likeBtn = document.getElementById('like-btn');
+            const addBtn = document.getElementById('add-btn');
+            const shareBtn = document.getElementById('share-btn');
+            
+            // Player state
+            let isPlaying = true;
+            let isShuffled = false;
+            let isRepeating = false;
+            let isMuted = false;
+            let currentVolume = 0.7;
+            
+            // Simulate progress
+            let progressInterval;
+            
+            function startProgress() {
+                clearInterval(progressInterval);
+                
+                progressInterval = setInterval(() => {
+                    const currentWidth = parseFloat(progress.style.width) || 0;
+                    
+                    if (currentWidth < 100) {
+                        progress.style.width = (currentWidth + 0.1) + '%';
+                        
+                        // Update time display (simulated)
+                        const currentSeconds = Math.floor((currentWidth / 100) * 225); // 3:45 = 225 seconds
+                        const minutes = Math.floor(currentSeconds / 60);
+                        const seconds = currentSeconds % 60;
+                        currentTimeEl.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                    } else {
+                        clearInterval(progressInterval);
+                    }
+                }, 100);
+            }
+            
+            function stopProgress() {
+                clearInterval(progressInterval);
+            }
+            
+            // Play/pause toggle
+            function togglePlayPause() {
+                if (isPlaying) {
+                    playIcon.classList.remove('fa-pause');
+                    playIcon.classList.add('fa-play');
+                    vinylRecord.classList.remove('playing');
+                    stopProgress();
+                } else {
+                    playIcon.classList.remove('fa-play');
+                    playIcon.classList.add('fa-pause');
+                    vinylRecord.classList.add('playing');
+                    startProgress();
+                }
+                isPlaying = !isPlaying;
+            }
+            
+            // Set progress bar on click
+            function setProgress(e) {
+                const width = this.clientWidth;
+                const clickX = e.offsetX;
+                const percent = (clickX / width) * 100;
+                
+                progress.style.width = percent + '%';
+                
+                // Update time display (simulated)
+                const currentSeconds = Math.floor((percent / 100) * 225);
+                const minutes = Math.floor(currentSeconds / 60);
+                const seconds = currentSeconds % 60;
+                currentTimeEl.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            }
+            
+            // Toggle shuffle
+            function toggleShuffle() {
+                isShuffled = !isShuffled;
+                shuffleBtn.classList.toggle('active', isShuffled);
+            }
+            
+            // Toggle repeat
+            function toggleRepeat() {
+                isRepeating = !isRepeating;
+                repeatBtn.classList.toggle('active', isRepeating);
+            }
+            
+            // Toggle mute
+            function toggleMute() {
+                isMuted = !isMuted;
+                volumeBtn.innerHTML = isMuted ? 
+                    '<i class="fas fa-volume-mute"></i>' : 
+                    '<i class="fas fa-volume-up"></i>';
+            }
+            
+            // Set volume
+            function setVolume(e) {
+                const width = this.clientWidth;
+                const clickX = e.offsetX;
+                currentVolume = clickX / width;
+                
+                volumeLevel.style.width = `${currentVolume * 100}%`;
+            }
+            
+            // Toggle like
+            function toggleLike() {
+                likeBtn.classList.toggle('active');
+            }
+            
+            // Event listeners
+            playPauseBtn.addEventListener('click', togglePlayPause);
+            
+            prevBtn.addEventListener('click', function() {
+                // In a real app, this would load the previous track
+                alert('Loading previous track...');
+            });
+            
+            nextBtn.addEventListener('click', function() {
+                // In a real app, this would load the next track
+                alert('Loading next track...');
+            });
+            
+            progressBar.addEventListener('click', setProgress);
+            
+            shuffleBtn.addEventListener('click', toggleShuffle);
+            repeatBtn.addEventListener('click', toggleRepeat);
+            volumeBtn.addEventListener('click', toggleMute);
+            volumeBar.addEventListener('click', setVolume);
+            likeBtn.addEventListener('click', toggleLike);
+            
+            addBtn.addEventListener('click', function() {
+                alert('Add to playlist functionality would go here');
+            });
+            
+            shareBtn.addEventListener('click', function() {
+                alert('Share functionality would go here');
+            });
+            
+            // Click on up next items
+            document.querySelectorAll('.up-next-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const title = this.querySelector('.up-next-title').textContent;
+                    const artist = this.querySelector('.up-next-artist').textContent;
+                    
+                    // Update now playing info
+                    document.querySelector('.track-title').textContent = title;
+                    document.querySelector('.track-artist').textContent = artist;
+                    
+                    // Reset progress
+                    progress.style.width = '0%';
+                    currentTimeEl.textContent = '0:00';
+                    
+                    // Ensure it's playing
+                    if (!isPlaying) {
+                        togglePlayPause();
+                    }
+                    
+                    // Show notification
+                    alert(`Now playing: ${title} by ${artist}`);
+                });
+            });
+            
+            // Initialize volume
+            volumeLevel.style.width = `${currentVolume * 100}%`;
+            
+            // Start progress simulation
+            startProgress();
+        });
+    </script>
+</body>
+</html>

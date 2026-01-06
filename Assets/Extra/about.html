@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Planet Play Music Promotion</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-black: #121212;
+            --secondary-black: #1e1e1e;
+            --accent-green: #1db954;
+            --light-green: #1ed760;
+            --text-white: #ffffff;
+            --text-gray: #b3b3b3;
+            --gradient-green: linear-gradient(135deg, #1db954, #1ed760);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--primary-black);
+            color: var(--text-white);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--secondary-black);
+            padding: 15px 0;
+            border-bottom: 2px solid var(--accent-green);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background-color: rgba(30, 30, 30, 0.95);
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .auth-section {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .auth-btn {
+            background-color: transparent;
+            color: var(--text-white);
+            border: 1px solid var(--accent-green);
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .auth-btn:hover {
+            background-color: var(--accent-green);
+            color: var(--primary-black);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 32px;
+            font-weight: 800;
+            background: var(--gradient-green);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .logo-icon {
+            font-size: 28px;
+            color: var(--accent-green);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: var(--text-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 16px;
+            position: relative;
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--accent-green);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-green);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 20px 0;
+            color: var(--text-gray);
+            font-size: 15px;
+            margin-top: 10px;
+        }
+        
+        .breadcrumb a {
+            color: var(--accent-green);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb span {
+            margin: 0 8px;
+        }
+        
+        /* Hero Section for Subpage */
+        .subpage-hero {
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.9)), 
+                        url('https://images.unsplash.com/photo-1511735111819-9a3f7709049c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .subpage-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-green);
+            opacity: 0.05;
+            z-index: 0;
+        }
+        
+        .subpage-hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .subpage-hero h1 {
+            font-size: 56px;
+            margin-bottom: 25px;
+            background: var(--gradient-green);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .subpage-hero-subtitle {
+            font-size: 22px;
+            margin-bottom: 40px;
+            color: var(--text-gray);
+            font-weight: 300;
+            line-height: 1.6;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Section Common Styles */
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+            font-size: 42px;
+            position: relative;
+            font-weight: 700;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--gradient-green);
+            margin: 20px auto 30px;
+            border-radius: 2px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+            font-size: 20px;
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+        
+        /* Foundational Story Section */
+        .foundation-section {
+            background-color: var(--secondary-black);
+        }
+        
+        .foundation-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .foundation-text {
+            margin-bottom: 60px;
+        }
+        
+        .foundation-text p {
+            font-size: 18px;
+            line-height: 1.9;
+            color: var(--text-gray);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .highlight-box {
+            background: rgba(29, 185, 84, 0.05);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 50px 0;
+            border-left: 4px solid var(--accent-green);
+        }
+        
+        .highlight-quote {
+            font-size: 24px;
+            color: var(--text-white);
+            font-style: italic;
+            line-height: 1.8;
+            text-align: center;
+            position: relative;
+        }
+        
+        .highlight-quote::before {
+            content: '"';
+            font-size: 80px;
+            color: var(--accent-green);
+            position: absolute;
+            top: -30px;
+            left: -10px;
+            opacity: 0.3;
+        }
+        
+        .quote-author {
+            text-align: right;
+            margin-top: 20px;
+            font-size: 18px;
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+        
+        /* Founder Section */
+        .founder-section {
+            background-color: var(--primary-black);
+        }
+        
+        .founder-container {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .founder-image {
+            flex: 0 0 300px;
+        }
+        
+        .founder-img-placeholder {
+            width: 100%;
+            height: 300px;
+            background: var(--gradient-green);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+            color: var(--primary-black);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .founder-info {
+            flex: 1;
+        }
+        
+        .founder-info h3 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: var(--accent-green);
+        }
+        
+        .founder-title {
+            font-size: 20px;
+            color: var(--text-gray);
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .founder-bio {
+            font-size: 18px;
+            line-height: 1.9;
+            color: var(--text-gray);
+            margin-bottom: 25px;
+        }
+        
+        .founder-contact {
+            margin-top: 30px;
+        }
+        
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            color: var(--text-gray);
+        }
+        
+        .contact-detail i {
+            color: var(--accent-green);
+            width: 20px;
+        }
+        
+        /* Digital Presence Section */
+        .digital-presence-section {
+            background-color: var(--secondary-black);
+        }
+        
+        .digital-presence-intro {
+            max-width: 800px;
+            margin: 0 auto 60px;
+            text-align: center;
+        }
+        
+        .digital-presence-intro p {
+            font-size: 20px;
+            line-height: 1.8;
+            color: var(--text-gray);
+        }
+        
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+        
+        .platform-card {
+            background: rgba(29, 185, 84, 0.05);
+            border-radius: 15px;
+            padding: 35px 25px;
+            text-align: center;
+            border: 1px solid #333;
+            transition: all 0.3s;
+        }
+        
+        .platform-card:hover {
+            border-color: var(--accent-green);
+            transform: translateY(-10px);
+        }
+        
+        .platform-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+            color: var(--accent-green);
+        }
+        
+        .platform-card h4 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--text-white);
+        }
+        
+        .platform-card p {
+            color: var(--text-gray);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        .platform-stats {
+            display: inline-block;
+            background: rgba(29, 185, 84, 0.1);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: var(--accent-green);
+        }
+        
+        /* Values Section */
+        .values-section {
+            background-color: var(--primary-black);
+        }
+        
+        .values-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .value-card {
+            background: var(--secondary-black);
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #333;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent-green);
+        }
+        
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 32px;
+            color: var(--primary-black);
+        }
+        
+        .value-card h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--accent-green);
+        }
+        
+        .value-card p {
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+        
+        /* Milestones Section */
+        .milestones-section {
+            background-color: var(--secondary-black);
+        }
+        
+        .milestones-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .milestones-timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .milestones-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--gradient-green);
+            border-radius: 3px;
+        }
+        
+        .milestone-item {
+            position: relative;
+            margin-bottom: 50px;
+            padding-left: 30px;
+        }
+        
+        .milestone-item::before {
+            content: '';
+            position: absolute;
+            left: -40px;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            border: 3px solid var(--secondary-black);
+            box-shadow: 0 0 0 3px var(--accent-green);
+        }
+        
+        .milestone-year {
+            font-size: 24px;
+            color: var(--accent-green);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .milestone-content {
+            background: rgba(29, 185, 84, 0.05);
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-green);
+        }
+        
+        .milestone-content h4 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--text-white);
+        }
+        
+        .milestone-content p {
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.95)), 
+                        url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-size: 48px;
+            margin-bottom: 30px;
+            color: var(--text-white);
+            font-weight: 700;
+        }
+        
+        .cta-section p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 50px;
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--gradient-green);
+            color: var(--primary-black);
+            padding: 16px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(29, 185, 84, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(29, 185, 84, 0.4);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary-black);
+            padding: 60px 0 30px;
+            border-top: 2px solid var(--accent-green);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-section h3 {
+            font-size: 24px;
+            margin-bottom: 25px;
+            color: var(--accent-green);
+        }
+        
+        .footer-section p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 16px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-green);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            background-color: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-white);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 18px;
+        }
+        
+        .social-icon:hover {
+            background: var(--gradient-green);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .subpage-hero h1 {
+                font-size: 48px;
+            }
+            
+            .section-title {
+                font-size: 36px;
+            }
+            
+            .founder-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .founder-image {
+                flex: 0 0 auto;
+            }
+            
+            .founder-img-placeholder {
+                width: 250px;
+                height: 250px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .subpage-hero h1 {
+                font-size: 40px;
+            }
+            
+            .subpage-hero-subtitle {
+                font-size: 20px;
+            }
+            
+            .section {
+                padding: 70px 0;
+            }
+            
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .platform-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .auth-section {
+                flex-direction: column;
+                width: 100%;
+                align-items: center;
+            }
+            
+            .auth-btn {
+                width: 180px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .subpage-hero h1 {
+                font-size: 34px;
+            }
+            
+            .subpage-hero-subtitle {
+                font-size: 18px;
+            }
+            
+            .section-title {
+                font-size: 32px;
+            }
+            
+            .milestone-item {
+                padding-left: 20px;
+            }
+            
+            .milestone-item::before {
+                left: -35px;
+            }
+            
+            .highlight-quote {
+                font-size: 20px;
+            }
+            
+            .cta-button {
+                padding: 14px 30px;
+                font-size: 16px;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: var(--gradient-green);
+            z-index: 1001;
+            transition: width 0.2s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+    
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <!-- Top Center Login/Signup Section -->
+            <div class="header-top">
+                <div class="auth-section">
+                    <button class="auth-btn">Artist Login</button>
+                    <button class="auth-btn">Label Sign Up</button>
+                </div>
+            </div>
+            
+            <!-- Main Header Content -->
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">♫</span>
+                    <h1>PLANET PLAY</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#" class="active">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="container breadcrumb">
+        <a href="index.html">Home</a> <span>></span> <span>About Us</span>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="subpage-hero">
+        <div class="container">
+            <div class="subpage-hero-content animate-fadeInUp">
+                <h1>ABOUT PLANET PLAY</h1>
+                <div class="subpage-hero-subtitle">
+                    A revolutionary music promotion platform founded on the principle of elevating artistic concepts 
+                    to professional dimensions through strategic digital placement and cross-platform amplification.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Foundational Story Section -->
+    <section class="section foundation-section">
+        <div class="container">
+            <h2 class="section-title">OUR FOUNDATIONAL STORY</h2>
+            <div class="section-subtitle">
+                From a personal initiative to a comprehensive promotional ecosystem, discover the journey 
+                that transformed Planet Play into a beacon for musical talent.
+            </div>
+            
+            <div class="foundation-content">
+                <div class="foundation-text">
+                    <p>
+                        Planet Play emerged in early 2024 as a visionary initiative founded by Michael Edet, 
+                        initially conceived as a strategic framework to elevate his own musical career. What 
+                        began as a personal promotional endeavor quickly revealed the universal challenges 
+                        faced by artists navigating an increasingly saturated digital landscape.
+                    </p>
+                    
+                    <p>
+                        Recognizing the systemic barriers preventing talented musicians from achieving 
+                        meaningful visibility, Michael expanded Planet Play's mission beyond personal 
+                        advancement. The platform evolved into a collective promotional space dedicated 
+                        to bridging the gap between emerging talent and established streaming ecosystems.
+                    </p>
+                    
+                    <div class="highlight-box">
+                        <div class="highlight-quote">
+                            Our mission transcends mere playlist placement. We're building pathways 
+                            to professional recognition that were previously inaccessible, transforming 
+                            musical potential into sustainable streaming success.
+                        </div>
+                        <div class="quote-author">— Michael Edet, Founder & CEO</div>
+                    </div>
+                    
+                    <p>
+                        Today, Planet Play operates as a purely digital entity with no physical headquarters, 
+                        embodying the borderless nature of modern music consumption. Our strategic presence 
+                        is concentrated across key social platforms where we maintain active communities, 
+                        provide artist support, and showcase success stories of transformation through 
+                        strategic digital placement.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Founder Section -->
+    <section class="section founder-section">
+        <div class="container">
+            <h2 class="section-title">THE VISIONARY BEHIND THE PLATFORM</h2>
+            <div class="section-subtitle">
+                Meet the founder whose personal journey in music inspired the creation of a platform 
+                dedicated to elevating artistic careers.
+            </div>
+            
+            <div class="founder-container">
+                <div class="founder-image">
+                    <div class="founder-img-placeholder">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+                
+                <div class="founder-info">
+                    <h3>Michael Edet</h3>
+                    <div class="founder-title">Founder & Chief Executive Officer</div>
+                    
+                    <div class="founder-bio">
+                        <p>
+                            As both a musician and digital strategist, Michael Edet possesses unique 
+                            insight into the challenges artists face in today's streaming-dominated 
+                            landscape. His personal experience navigating the complexities of music 
+                            promotion inspired the creation of Planet Play as a solution-oriented 
+                            platform.
+                        </p>
+                        
+                        <p>
+                            Michael's dual perspective as artist and promoter enables him to understand 
+                            both the creative and commercial dimensions of music careers. This insight 
+                            informs Planet Play's approach to artist development, balancing artistic 
+                            integrity with strategic promotional methodologies.
+                        </p>
+                        
+                        <p>
+                            Under his leadership, Planet Play has grown from a personal initiative 
+                            to a respected promotional entity, helping numerous artists achieve 
+                            measurable streaming success and professional recognition across multiple 
+                            platforms.
+                        </p>
+                    </div>
+                    
+                    <div class="founder-contact">
+                        <div class="contact-detail">
+                            <i class="fas fa-envelope"></i>
+                            <span>michael.edet@planetplay.com</span>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>+1 (234) 567-8900</span>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-globe"></i>
+                            <span>Direct consultation available by appointment</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Digital Presence Section -->
+    <section class="section digital-presence-section">
+        <div class="container">
+            <h2 class="section-title">OUR DIGITAL ECOSYSTEM</h2>
+            <div class="section-subtitle">
+                Operating without physical boundaries, we maintain strategic presence where artists 
+                and audiences converge in the digital landscape.
+            </div>
+            
+            <div class="digital-presence-intro">
+                <p>
+                    Planet Play embraces the borderless nature of modern music promotion, operating 
+                    exclusively through digital channels. This approach allows us to serve artists 
+                    globally while maintaining agile, responsive operations focused on real-time 
+                    engagement and community building.
+                </p>
+            </div>
+            
+            <div class="platform-grid">
+                <div class="platform-card">
+                    <div class="platform-icon">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <h4>Instagram</h4>
+                    <p>
+                        Visual storytelling, artist features, and behind-the-scenes content 
+                        showcasing the transformation journeys of our partnered artists.
+                    </p>
+                    <div class="platform-stats">@Planet_Play_Music</div>
+                </div>
+                
+                <div class="platform-card">
+                    <div class="platform-icon">
+                        <i class="fab fa-facebook-f"></i>
+                    </div>
+                    <h4>Facebook</h4>
+                    <p>
+                        Community discussions, success story highlights, and comprehensive 
+                        updates about playlist additions and platform developments.
+                    </p>
+                    <div class="platform-stats">@PlanetPlayOfficial</div>
+                </div>
+                
+                <div class="platform-card">
+                    <div class="platform-icon">
+                        <i class="fab fa-twitter"></i>
+                    </div>
+                    <h4>X (Twitter)</h4>
+                    <p>
+                        Real-time industry insights, platform updates, and engagement with 
+                        the broader music community through strategic conversations.
+                    </p>
+                    <div class="platform-stats">@PlanetPlayMusic</div>
+                </div>
+                
+                <div class="platform-card">
+                    <div class="platform-icon">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h4>Streaming Platforms</h4>
+                    <p>
+                        Direct playlist integration across Spotify, Boomplay, SoundCloud, 
+                        and Audiomack with dedicated audience engagement strategies.
+                    </p>
+                    <div class="platform-stats">12 Curated Playlists</div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+                <p style="color: var(--text-gray); font-size: 18px; line-height: 1.8;">
+                    <span style="color: var(--accent-green); font-weight: 600;">No Physical Office, Maximum Digital Impact:</span> 
+                    By operating exclusively through digital channels, we maintain lower overheads 
+                    while maximizing our promotional reach, passing the benefits directly to our 
+                    partnered artists through focused, efficient promotional strategies.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="section values-section">
+        <div class="container">
+            <h2 class="section-title">OUR CORE VALUES</h2>
+            <div class="section-subtitle">
+                The principles that guide our approach to artist development and digital promotion.
+            </div>
+            
+            <div class="values-container">
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3>Artistic Integrity</h3>
+                        <p>
+                            We prioritize the preservation of artistic vision while implementing 
+                            promotional strategies, ensuring that commercial success never 
+                            compromises creative authenticity.
+                        </p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Strategic Growth</h3>
+                        <p>
+                            Our approach emphasizes sustainable career development over 
+                            short-term gains, building lasting fanbases through thoughtful 
+                            playlist placement and audience engagement.
+                        </p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Community Focus</h3>
+                        <p>
+                            We believe in the power of musical communities and work to 
+                            connect artists with audiences that genuinely appreciate their 
+                            specific creative expressions.
+                        </p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h3>Precision Placement</h3>
+                        <p>
+                            Every playlist addition is carefully considered for optimal 
+                            audience alignment, ensuring music reaches listeners most 
+                            likely to become dedicated fans.
+                        </p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h3>Digital Innovation</h3>
+                        <p>
+                            We continuously adapt to evolving digital landscapes, leveraging 
+                            new platforms and technologies to maximize artist visibility and 
+                            engagement.
+                        </p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Transparent Partnerships</h3>
+                        <p>
+                            We maintain clear communication and mutually beneficial agreements 
+                            with all artists, building relationships based on trust and 
+                            measurable results.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Milestones Section -->
+    <section class="section milestones-section">
+        <div class="container">
+            <h2 class="section-title">KEY MILESTONES</h2>
+            <div class="section-subtitle">
+                Significant moments in our journey from personal initiative to established 
+                promotional platform.
+            </div>
+            
+            <div class="milestones-container">
+                <div class="milestones-timeline">
+                    <div class="milestone-item">
+                        <div class="milestone-year">January 2024</div>
+                        <div class="milestone-content">
+                            <h4>Platform Inception</h4>
+                            <p>
+                                Planet Play founded by Michael Edet as a personal promotional 
+                                initiative to elevate his musical career through strategic 
+                                digital placement.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="milestone-item">
+                        <div class="milestone-year">March 2024</div>
+                        <div class="milestone-content">
+                            <h4>Mission Expansion</h4>
+                            <p>
+                                Recognition of universal artist challenges leads to expansion 
+                                of services to include other musicians, transforming Planet Play 
+                                into a collective promotional space.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="milestone-item">
+                        <div class="milestone-year">May 2024</div>
+                        <div class="milestone-content">
+                            <h4>Playlist Network Establishment</h4>
+                            <p>
+                                Launch of signature playlist series (Afro Planet, Hip-Hop Planet, 
+                                Radio Planet) across Spotify, Boomplay, SoundCloud, and Audiomack.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="milestone-item">
+                        <div class="milestone-year">July 2024</div>
+                        <div class="milestone-content">
+                            <h4>Digital-First Model Finalization</h4>
+                            <p>
+                                Decision to operate exclusively through digital channels with 
+                                no physical headquarters, maximizing reach and operational efficiency.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="milestone-item">
+                        <div class="milestone-year">September 2024</div>
+                        <div class="milestone-content">
+                            <h4>Cross-Platform Milestone</h4>
+                            <p>
+                                Achievement of 2.4M+ total streams across all platforms, 
+                                validating the effectiveness of the multi-platform promotional strategy.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="milestone-item">
+                        <div class="milestone-year">Present Day</div>
+                        <div class="milestone-content">
+                            <h4>Ecosystem Maturation</h4>
+                            <p>
+                                Planet Play now operates as a comprehensive promotional ecosystem 
+                                serving artists across multiple genres with established success 
+                                metrics and a growing community of partnered talent.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>JOIN OUR EVOLUTIONARY JOURNEY</h2>
+            <p>
+                Become part of a promotional platform that understands the artist's journey 
+                from personal experience and is dedicated to creating measurable pathways 
+                to professional recognition.
+            </p>
+            <a href="services.html" class="cta-button">EXPLORE OUR SERVICES</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>PLANET PLAY</h3>
+                    <p>
+                        A revolutionary music promotion platform illuminating artistic 
+                        concepts and propelling careers into professional dimensions 
+                        through strategic digital placement.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Navigation</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="services.html">Our Services</a></li>
+                        <li><a href="index.html#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Platform Presence</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Spotify Playlists</a></li>
+                        <li><a href="#">Boomplay Integration</a></li>
+                        <li><a href="#">SoundCloud Network</a></li>
+                        <li><a href="#">Audiomack Placement</a></li>
+                        <li><a href="#">Cross-Platform Strategy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Legal & Information</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Artist Agreement</a></li>
+                        <li><a href="#">Copyright Information</a></li>
+                        <li><a href="#">Data Protection</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2024 Planet Play Music Promotion. All rights reserved. Founded by Michael Edet.</p>
+                <p style="margin-top: 10px; font-size: 12px;">This is a digital platform with no physical office location.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll Progress Bar
+        window.addEventListener('scroll', function() {
+            const scrollProgress = document.getElementById('scrollProgress');
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (window.scrollY / windowHeight) * 100;
+            scrollProgress.style.width = scrolled + '%';
+        });
+        
+        // Smooth Scrolling for Navigation
+        document.querySelectorAll('nav a, .footer-links a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId.startsWith('#') && targetId !== '#') {
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+        
+        // Active Navigation Highlighting
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('nav a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if(scrollY >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if(link.getAttribute('href').includes(current) || 
+                   (current === '' && link.getAttribute('href') === '#')) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Auth Button Functionality
+        document.querySelectorAll('.auth-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const action = this.textContent;
+                alert(`Redirecting to ${action} portal...`);
+            });
+        });
+        
+        // CTA Button
+        document.querySelector('.cta-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'services.html';
+        });
+        
+        // Animation on Scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe elements for animation
+        document.querySelectorAll('.value-card, .platform-card, .milestone-item').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(element);
+        });
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Planet Play About Us Subpage Loaded');
+            
+            // Set active navigation
+            const currentPage = window.location.pathname.split('/').pop();
+            document.querySelectorAll('nav a').forEach(link => {
+                if(link.getAttribute('href') === currentPage || 
+                   (currentPage === '' && link.getAttribute('href') === 'index.html')) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

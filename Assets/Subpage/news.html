@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <title>Community Updates | Planet Play</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/Assets/css/newss.css">
+    <link rel="stylesheet" href="/Assets/css/floating-bottun.css">
+        <link href="/Assets/image/logo/20240428_221650.png" rel="icon">
+    <link rel="apple-touch-icon" href="/Assets/image/logo/20240428_221650.png">
+    <link rel="stylesheet" href="/Assets/css/logo.css">
+    <style>
+     
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <!-- Top Center Login/Signup Section -->
+         <!--   <div class="header-top">
+                <div class="auth-section">
+                    <button class="auth-btn">Login</button>
+                    <button class="auth-btn">Sign Up</button>
+                </div>
+            </div>
+            
+            <!-- Main Header Content -->
+            <div class="header-content">
+                <div class="logo">
+               <span class="logo-icon"><img src="/Assets/image/logo/20240428_221650.png"></span>
+                    <h1>Planet Play</h1>
+                </div>
+                <nav>
+       <ul>
+           <li><a href="/index.html">Home</a></li>
+           <li><a href="/Assets/Subpage/platforms.html">Platforms</a></li>
+           <li><a href="/Assets/Subpage/playlist.html">Playlists</a></li>
+           <li><a href="/Assets/Subpage/artist-lebel.html">Artists</a></li>
+           <li><a href="/Assets/Subpage/news.html" class="active">community</a></li>
+           <li><a href="/Assets/Subpage/contact.html">Contact</a></li>
+       </ul>
+   </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Community Updates</h2>
+            <p>Join the conversation! Share your thoughts, vote on polls, and stay updated with the latest from Planet Play.</p>
+            <button class="post-notice-btn" id="openPostForm">+ Post New Update</button>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="community-page">
+        <div class="container">
+            <div class="content-container">
+                <!-- Left Column: Posts & Polls -->
+                <div class="posts-container">
+                    <!-- Active Poll -->
+                    <div class="poll-card">
+                        <h3 class="poll-title">Which new feature should we prioritize?</h3>
+                        <div class="poll-options" id="pollOptions">
+                            <div class="poll-option" data-option="1">
+                                <input type="radio" name="poll" class="poll-radio" id="option1">
+                                <label class="poll-label" for="option1">Live streaming integration</label>
+                                <span class="poll-percentage">0%</span>
+                            </div>
+                            <div class="poll-option" data-option="2">
+                                <input type="radio" name="poll" class="poll-radio" id="option2">
+                                <label class="poll-label" for="option2">Collaborative playlist creation</label>
+                                <span class="poll-percentage">0%</span>
+                            </div>
+                            <div class="poll-option" data-option="3">
+                                <input type="radio" name="poll" class="poll-radio" id="option3">
+                                <label class="poll-label" for="option3">AI-powered music recommendations</label>
+                                <span class="poll-percentage">0%</span>
+                            </div>
+                            <div class="poll-option" data-option="4">
+                                <input type="radio" name="poll" class="poll-radio" id="option4">
+                                <label class="poll-label" for="option4">Advanced artist analytics dashboard</label>
+                                <span class="poll-percentage">0%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="poll-results" id="pollResults">
+                            <div class="poll-option">
+                                <div class="poll-label">Live streaming integration</div>
+                                <div class="poll-percentage">42%</div>
+                                <div class="poll-bar"><div class="poll-fill" style="width: 42%"></div></div>
+                            </div>
+                            <div class="poll-option">
+                                <div class="poll-label">Collaborative playlist creation</div>
+                                <div class="poll-percentage">28%</div>
+                                <div class="poll-bar"><div class="poll-fill" style="width: 28%"></div></div>
+                            </div>
+                            <div class="poll-option">
+                                <div class="poll-label">AI-powered music recommendations</div>
+                                <div class="poll-percentage">18%</div>
+                                <div class="poll-bar"><div class="poll-fill" style="width: 18%"></div></div>
+                            </div>
+                            <div class="poll-option">
+                                <div class="poll-label">Advanced artist analytics dashboard</div>
+                                <div class="poll-percentage">12%</div>
+                                <div class="poll-bar"><div class="poll-fill" style="width: 12%"></div></div>
+                            </div>
+                            <div class="poll-total">Total Votes: 1,248</div>
+                        </div>
+                        
+                        <button class="poll-vote-btn" id="voteBtn">Vote Now</button>
+                        <button class="poll-vote-btn" id="viewResultsBtn" style="display: none; margin-top: 10px; background-color: #333;">View Results</button>
+                    </div>
+                    
+                    <!-- Post 1 -->
+                    <article class="post-card" id="post1">
+                        <div class="post-header">
+                            <div class="post-meta">
+                                <div class="post-author">
+                                    <div class="author-avatar">PP</div>
+                                    <div class="author-info">
+                                        <h4>Planet Play Team</h4>
+                                        <p>Official Account • 2 hours ago</p>
+                                    </div>
+                                </div>
+                                <span class="post-category">ANNOUNCEMENT</span>
+                            </div>
+                            <h3 class="post-title">New Feature: Collaborative Playlists</h3>
+                        </div>
+                        
+                        <div class="post-content"><a href="/Assets/post detail/Template/template.html">
+                            <p class="post-text">We're excited to announce that collaborative playlist creation is now live! You can now invite friends, artists, and other users to contribute to your playlists across all platforms. This feature has been one of our most requested updates, and we can't wait to see what amazing playlists you create together.</p>
+                            <div class="post-image" style="background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div></a>
+                        </div>
+                        
+                        <div class="post-interactions">
+                            <div class="interaction-buttons">
+                                <button class="interaction-btn like-btn" data-post="1">
+                                    <i class="far fa-thumbs-up"></i> <span class="like-count">124</span>
+                                </button>
+                                <button class="interaction-btn dislike-btn" data-post="1">
+                                    <i class="far fa-thumbs-down"></i> <span class="dislike-count">3</span>
+                                </button>
+                                <button class="interaction-btn comment-btn" data-post="1">
+                                    <i class="far fa-comment"></i> <span class="comment-count">24</span>
+                                </button>
+                                <div class="share-options">
+                                    <button class="interaction-btn share-btn">
+                                        <i class="fas fa-share-alt"></i> Share
+                                    </button>
+                                    <div class="share-dropdown">
+                                        <a href="#" class="share-option">
+                                            <div class="share-icon facebook"><i class="fab fa-facebook-f"></i></div>
+                                            <span>Facebook</span>
+                                        </a>
+                                        <a href="#" class="share-option">
+                                            <div class="share-icon twitter"><i class="fab fa-twitter"></i></div>
+                                            <span>Twitter</span>
+                                        </a>
+                                        <a href="#" class="share-option">
+                                            <div class="share-icon whatsapp"><i class="fab fa-whatsapp"></i></div>
+                                            <span>WhatsApp</span>
+                                        </a>
+                                        <a href="#" class="share-option" id="copyLink1">
+                                            <div class="share-icon link"><i class="fas fa-link"></i></div>
+                                            <span>Copy Link</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="post-views">
+                                <i class="far fa-eye"></i> 1.2K views
+                            </div>
+                        </div>
+                        
+                        <div class="comments-section" id="comments1">
+                            <h4 class="comments-title">Comments (24)</h4>
+                            <div class="comment-form">
+                                <input type="text" class="comment-input" placeholder="Add a comment...">
+                                <button class="comment-submit">Post</button>
+                            </div>
+                            <div class="comments-list">
+                                <div class="comment">
+                                    <div class="comment-header">
+                                        <span class="comment-author">MusicLover92</span>
+                                        <span class="comment-time">1 hour ago</span>
+                                    </div>
+                                    <p class="comment-text">This is amazing! Finally can create playlists with my friends for our road trips.</p>
+                                    <div class="comment-actions">
+                                        <button class="like-btn"><i class="far fa-thumbs-up"></i> 12</button>
+                                        <button class="reply-btn">Reply</button>
+                                    </div>
+                                </div>
+                                <div class="comment">
+                                    <div class="comment-header">
+                                        <span class="comment-author">DJ_Pro</span>
+                                        <span class="comment-time">45 minutes ago</span>
+                                    </div>
+                                    <p class="comment-text">Can artists contribute to user playlists too? This would be great for collaborations!</p>
+                                    <div class="comment-actions">
+                                        <button class="like-btn"><i class="far fa-thumbs-up"></i> 8</button>
+                                        <button class="reply-btn">Reply</button>
+                                    </div>
+                                    <div class="replies">
+                                        <div class="comment">
+                                            <div class="comment-header">
+                                                <span class="comment-author">Planet Play Team</span>
+                                                <span class="comment-time">30 minutes ago</span>
+                                            </div>
+                                            <p class="comment-text">Yes! Artists can be invited to contribute. We're working on making this even easier in the next update.</p>
+                                            <div class="comment-actions">
+                                                <button class="like-btn"><i class="far fa-thumbs-up"></i> 5</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- Post 2 -->
+                    <article class="post-card" id="post2">
+                        <div class="post-header">
+                            <div class="post-meta">
+                                <div class="post-author">
+                                    <div class="author-avatar">AJ</div>
+                                    <div class="author-info">
+                                        <h4>Alex Johnson</h4>
+                                        <p>Community Member • 1 day ago</p>
+                                    </div>
+                                </div>
+                                <span class="post-category">SUGGESTION</span>
+                            </div>
+                            <h3 class="post-title">Would love to see a "Radio" feature based on mood</h3>
+                        </div>
+                        
+                        <div class="post-content">
+                            <p class="post-text">Spotify has Daily Mix, Apple Music has personalized radio stations. I think Planet Play could do even better with mood-based radio that pulls from all platforms. What do you all think? Would you use this feature?</p>
+                        </div>
+                        
+                        <div class="post-interactions">
+                            <div class="interaction-buttons">
+                                <button class="interaction-btn like-btn" data-post="2">
+                                    <i class="far fa-thumbs-up"></i> <span class="like-count">89</span>
+                                </button>
+                                <button class="interaction-btn dislike-btn" data-post="2">
+                                    <i class="far fa-thumbs-down"></i> <span class="dislike-count">2</span>
+                                </button>
+                                <button class="interaction-btn comment-btn" data-post="2">
+                                    <i class="far fa-comment"></i> <span class="comment-count">17</span>
+                                </button>
+                                <div class="share-options">
+                                    <button class="interaction-btn share-btn">
+                                        <i class="fas fa-share-alt"></i> Share
+                                    </button>
+                                    <div class="share-dropdown">
+                                        <a href="#" class="share-option">
+                                            <div class="share-icon facebook"><i class="fab fa-facebook-f"></i></div>
+                                            <span>Facebook</span>
+                                        </a>
+                                        <a href="#" class="share-option">
+                                            <div class="share-icon twitter"><i class="fab fa-twitter"></i></div>
+                                            <span>Twitter</span>
+                                        </a>
+                                        <a href="#" class="share-option">
+                                            <div class="share-icon whatsapp"><i class="fab fa-whatsapp"></i></div>
+                                            <span>WhatsApp</span>
+                                        </a>
+                                        <a href="#" class="share-option" id="copyLink2">
+                                            <div class="share-icon link"><i class="fas fa-link"></i></div>
+                                            <span>Copy Link</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="post-views">
+                                <i class="far fa-eye"></i> 845 views
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                
+                <!-- Right Column: Sidebar -->
+                <div class="community-sidebar">
+                    <!-- Trending Posts -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">Trending Now</h3>
+                        <ul class="trending-posts">
+                            <li class="trending-post">
+                                <div class="trending-rank">1</div>
+                                <div class="trending-content">
+                                    <h4>New Platform Integration</h4>
+                                    <div class="trending-stats">
+                                        <span><i class="far fa-thumbs-up"></i> 245</span>
+                                        <span><i class="far fa-comment"></i> 42</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="trending-post">
+                                <div class="trending-rank">2</div>
+                                <div class="trending-content">
+                                    <h4>Upcoming Feature Poll</h4>
+                                    <div class="trending-stats">
+                                        <span><i class="far fa-thumbs-up"></i> 189</span>
+                                        <span><i class="far fa-comment"></i> 31</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="trending-post">
+                                <div class="trending-rank">3</div>
+                                <div class="trending-content">
+                                    <h4>Artist Spotlight Interview</h4>
+                                    <div class="trending-stats">
+                                        <span><i class="far fa-thumbs-up"></i> 156</span>
+                                        <span><i class="far fa-comment"></i> 28</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Popular Tags -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">Popular Tags</h3>
+                        <div class="tags-container">
+                            <a href="#" class="tag">#newfeature</a>
+                            <a href="#" class="tag">#suggestion</a>
+                            <a href="#" class="tag">#bugreport</a>
+                            <a href="#" class="tag">#platformupdate</a>
+                            <a href="#" class="tag">#artistspotlight</a>
+                            <a href="#" class="tag">#playlist</a>
+                            <a href="#" class="tag">#collaboration</a>
+                            <a href="#" class="tag">#musictech</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Community Guidelines -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">Community Guidelines</h3>
+                        <ul style="color: var(--text-gray); font-size: 14px; line-height: 1.6;">
+                            <li style="margin-bottom: 10px;">✓ Be respectful to all members</li>
+                            <li style="margin-bottom: 10px;">✓ Stay on topic and relevant</li>
+                            <li style="margin-bottom: 10px;">✓ No spam or self-promotion</li>
+                            <li style="margin-bottom: 10px;">✓ Report inappropriate content</li>
+                            <li>✓ Help make this community great!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Post Notification Form (Initially Hidden) -->
+            <div class="notification-form-container" id="postForm" style="display: none;">
+                <h3 class="form-title">Post New Update</h3>
+                <form id="newPostForm">
+                    <div class="form-group">
+                        <label class="form-label">Title</label>
+                        <input type="text" class="form-input" placeholder="Enter post title" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Category</label>
+                        <select class="form-select" required>
+                            <option value="">Select category</option>
+                            <option value="announcement">Announcement</option>
+                            <option value="update">Platform Update</option>
+                            <option value="event">Event</option>
+                            <option value="suggestion">Suggestion</option>
+                            <option value="question">Question</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Content</label>
+                        <textarea class="form-textarea" placeholder="Write your update here..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Image URL (Optional)</label>
+                        <input type="text" class="form-input" placeholder="https://example.com/image.jpg">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Tags</label>
+                        <input type="text" class="form-input" placeholder="#newfeature #update #platform (separate with spaces)">
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="form-cancel" id="cancelPost">Cancel</button>
+                        <button type="submit" class="form-submit">Publish Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Planet Play</h3>
+                    <p>Aggregating music across all platforms to deliver the perfect listening experience.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="platforms.html">Platforms</a></li>
+                        <li><a href="playlists.html">Playlists</a></li>
+                        <li><a href="artists.html">Artists</a></li>
+                        <li><a href="news.html" class="active">Community</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Community</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Guidelines</a></li>
+                        <li><a href="#">Featured Posts</a></li>
+                        <li><a href="#">Member Spotlight</a></li>
+                        <li><a href="#">Weekly Polls</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li>Email: community@planetplay.com</li>
+                        <li>Phone: +1 (555) 123-4567</li>
+                        <li>Support: support@planetplay.com</li>
+                        <li>Address: 123 Music Ave, Sound City</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Planet Play. All rights reserved. | <a href="#" style="color: var(--accent-green);">Community Guidelines</a> | <a href="#" style="color: var(--accent-green);">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+    
+        <div class="container">
+        
+    </div>
+    
+<!-- Floating navigation bar -->
+<div class="cart-icon">
+    <div class="icon-box"><a href="/Assets/Subpage/submit.html">
+        <i class="fas fa-cloud-upload-alt"></i></a>
+    </div>
+    <div class="icon-box"><a href="/index.html">
+        <i class="fas fa-house"></i></a>
+    </div>
+    <div class="icon-box"><a href="/Assets/ backend/authentication/user-portal.html">
+        <i class="fas fa-user"></i></a>
+    </div>
+    <div class="icon-box"><a href="/Assets/pages/library/music-home.html">
+            <i class="fas fa-music"></i></a>
+    </div>
+</div>
+<div class="shadow-background"></div>
+
+
+    <script>
+        // Social Interactions Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Login/Signup buttons
+            const authButtons = document.querySelectorAll('.auth-btn');
+            authButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const action = this.textContent;
+                    alert(`${action} functionality would be implemented here`);
+                });
+            });
+            
+            // Like/Dislike functionality
+            const likeButtons = document.querySelectorAll('.like-btn');
+            const dislikeButtons = document.querySelectorAll('.dislike-btn');
+            
+            likeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const postId = this.getAttribute('data-post');
+                    const likeCount = this.querySelector('.like-count');
+                    let currentLikes = parseInt(likeCount.textContent);
+                    
+                    if (this.classList.contains('active')) {
+                        // Unlike
+                        this.classList.remove('active');
+                        likeCount.textContent = currentLikes - 1;
+                        this.innerHTML = '<i class="far fa-thumbs-up"></i> <span class="like-count">' + (currentLikes - 1) + '</span>';
+                    } else {
+                        // Like
+                        this.classList.add('active');
+                        likeCount.textContent = currentLikes + 1;
+                        this.innerHTML = '<i class="fas fa-thumbs-up"></i> <span class="like-count">' + (currentLikes + 1) + '</span>';
+                        
+                        // Remove dislike if active
+                        const dislikeBtn = document.querySelector(`.dislike-btn[data-post="${postId}"]`);
+                        if (dislikeBtn.classList.contains('active')) {
+                            const dislikeCount = dislikeBtn.querySelector('.dislike-count');
+                            let currentDislikes = parseInt(dislikeCount.textContent);
+                            dislikeBtn.classList.remove('active');
+                            dislikeCount.textContent = currentDislikes - 1;
+                            dislikeBtn.innerHTML = '<i class="far fa-thumbs-down"></i> <span class="dislike-count">' + (currentDislikes - 1) + '</span>';
+                        }
+                    }
+                });
+            });
+            
+            dislikeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const postId = this.getAttribute('data-post');
+                    const dislikeCount = this.querySelector('.dislike-count');
+                    let currentDislikes = parseInt(dislikeCount.textContent);
+                    
+                    if (this.classList.contains('active')) {
+                        // Remove dislike
+                        this.classList.remove('active');
+                        dislikeCount.textContent = currentDislikes - 1;
+                        this.innerHTML = '<i class="far fa-thumbs-down"></i> <span class="dislike-count">' + (currentDislikes - 1) + '</span>';
+                    } else {
+                        // Dislike
+                        this.classList.add('active');
+                        dislikeCount.textContent = currentDislikes + 1;
+                        this.innerHTML = '<i class="fas fa-thumbs-down"></i> <span class="dislike-count">' + (currentDislikes + 1) + '</span>';
+                        
+                        // Remove like if active
+                        const likeBtn = document.querySelector(`.like-btn[data-post="${postId}"]`);
+                        if (likeBtn.classList.contains('active')) {
+                            const likeCount = likeBtn.querySelector('.like-count');
+                            let currentLikes = parseInt(likeCount.textContent);
+                            likeBtn.classList.remove('active');
+                            likeCount.textContent = currentLikes - 1;
+                            likeBtn.innerHTML = '<i class="far fa-thumbs-up"></i> <span class="like-count">' + (currentLikes - 1) + '</span>';
+                        }
+                    }
+                });
+            });
+            
+            // Comment toggle functionality
+            const commentButtons = document.querySelectorAll('.comment-btn');
+            commentButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const postId = this.getAttribute('data-post');
+                    const commentsSection = document.getElementById(`comments${postId}`);
+                    commentsSection.classList.toggle('expanded');
+                    
+                    // Update icon
+                    const icon = this.querySelector('i');
+                    if (commentsSection.classList.contains('expanded')) {
+                        icon.className = 'fas fa-comment';
+                    } else {
+                        icon.className = 'far fa-comment';
+                    }
+                });
+            });
+            
+            // Share dropdown functionality
+            const shareButtons = document.querySelectorAll('.share-btn');
+            shareButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const dropdown = this.nextElementSibling;
+                    dropdown.classList.toggle('active');
+                });
+            });
+            
+            // Close share dropdowns when clicking elsewhere
+            document.addEventListener('click', function() {
+                document.querySelectorAll('.share-dropdown').forEach(dropdown => {
+                    dropdown.classList.remove('active');
+                });
+            });
+            
+            // Copy link functionality
+            const copyLinkButtons = document.querySelectorAll('[id^="copyLink"]');
+            copyLinkButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const tempInput = document.createElement('input');
+                    tempInput.value = window.location.href;
+                    document.body.appendChild(tempInput);
+                    tempInput.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(tempInput);
+                    
+                    // Show confirmation
+                    const originalText = this.querySelector('span').textContent;
+                    this.querySelector('span').textContent = 'Copied!';
+                    setTimeout(() => {
+                        this.querySelector('span').textContent = originalText;
+                    }, 2000);
+                });
+            });
+            
+            // Poll functionality
+            const pollOptions = document.querySelectorAll('.poll-option');
+            const voteBtn = document.getElementById('voteBtn');
+            const viewResultsBtn = document.getElementById('viewResultsBtn');
+            const pollResults = document.getElementById('pollResults');
+            let selectedOption = null;
+            
+            pollOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove selected class from all options
+                    pollOptions.forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+                    selectedOption = this.getAttribute('data-option');
+                    
+                    // Update radio button
+                    const radio = this.querySelector('.poll-radio');
+                    radio.checked = true;
+                });
+            });
+            
+            voteBtn.addEventListener('click', function() {
+                if (!selectedOption) {
+                    alert('Please select an option to vote!');
+                    return;
+                }
+                
+                // Simulate voting
+                alert(`Thank you for voting! You selected option ${selectedOption}.`);
+                
+                // Show results
+                pollResults.classList.add('active');
+                voteBtn.style.display = 'none';
+                viewResultsBtn.style.display = 'block';
+                
+                // Update vote counts (simulated)
+                const percentages = [42, 28, 18, 12];
+                const totalVotes = 1248;
+                
+                document.querySelectorAll('.poll-percentage').forEach((perc, index) => {
+                    perc.textContent = percentages[index] + '%';
+                });
+                
+                document.querySelectorAll('.poll-fill').forEach((fill, index) => {
+                    fill.style.width = percentages[index] + '%';
+                });
+                
+                document.querySelector('.poll-total').textContent = `Total Votes: ${totalVotes + 1}`;
+            });
+            
+            viewResultsBtn.addEventListener('click', function() {
+                pollResults.classList.toggle('active');
+                if (pollResults.classList.contains('active')) {
+                    this.textContent = 'Hide Results';
+                } else {
+                    this.textContent = 'View Results';
+                }
+            });
+            
+            // Post form functionality
+            const openPostFormBtn = document.getElementById('openPostForm');
+            const postForm = document.getElementById('postForm');
+            const cancelPostBtn = document.getElementById('cancelPost');
+            const newPostForm = document.getElementById('newPostForm');
+            
+            openPostFormBtn.addEventListener('click', function() {
+                postForm.style.display = 'block';
+                window.scrollTo({
+                    top: postForm.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            });
+            
+            cancelPostBtn.addEventListener('click', function() {
+                postForm.style.display = 'none';
+            });
+            
+            newPostForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const title = this.querySelector('input[type="text"]').value;
+                const category = this.querySelector('select').value;
+                const content = this.querySelector('textarea').value;
+                
+                // Simulate form submission
+                alert(`Post "${title}" has been submitted for review!`);
+                this.reset();
+                postForm.style.display = 'none';
+            });
+            
+            // Comment submission
+            const commentForms = document.querySelectorAll('.comment-form');
+            commentForms.forEach(form => {
+                const submitBtn = form.querySelector('.comment-submit');
+                const input = form.querySelector('.comment-input');
+                
+                submitBtn.addEventListener('click', function() {
+                    if (input.value.trim() === '') {
+                        alert('Please enter a comment');
+                        return;
+                    }
+                    
+                    // Create new comment
+                    const commentsList = form.nextElementSibling;
+                    const newComment = document.createElement('div');
+                    newComment.className = 'comment';
+                    newComment.innerHTML = `
+                        <div class="comment-header">
+                            <span class="comment-author">You</span>
+                            <span class="comment-time">Just now</span>
+                        </div>
+                        <p class="comment-text">${input.value}</p>
+                        <div class="comment-actions">
+                            <button class="like-btn"><i class="far fa-thumbs-up"></i> 0</button>
+                            <button class="reply-btn">Reply</button>
+                        </div>
+                    `;
+                    
+                    commentsList.prepend(newComment);
+                    input.value = '';
+                    
+                    // Update comment count
+                    const commentBtn = form.closest('.post-card').querySelector('.comment-btn');
+                    const commentCount = commentBtn.querySelector('.comment-count');
+                    let currentCount = parseInt(commentCount.textContent);
+                    commentCount.textContent = currentCount + 1;
+                });
+                
+                // Allow Enter key to submit
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        submitBtn.click();
+                    }
+                });
+            });
+            
+            // Post Notice button in hero
+            const postNoticeBtn = document.querySelector('.post-notice-btn');
+            postNoticeBtn.addEventListener('click', function() {
+                alert('Redirecting to post creation form...');
+                document.getElementById('openPostForm').click();
+            });
+        });
+    </script>
+    
+    <script src="/Assets/pageloader/loader-all-in-one.js"></script>
+    
+</body>
+</html>

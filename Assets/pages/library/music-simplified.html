@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planet Play | Music Player (No JS)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-black: #121212;
+            --secondary-black: #1e1e1e;
+            --accent-green: #1db954;
+            --light-green: #1ed760;
+            --text-white: #ffffff;
+            --text-gray: #b3b3b3;
+            --player-height: 90px;
+            --sidebar-width: 280px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--primary-black);
+            color: var(--text-white);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--secondary-black);
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 20px;
+            overflow-y: auto;
+            z-index: 10;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--accent-green), var(--light-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .logo-icon {
+            font-size: 24px;
+            color: var(--accent-green);
+        }
+        
+        .nav-links {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+        
+        .nav-links li {
+            margin-bottom: 15px;
+        }
+        
+        .nav-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--text-white);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-links i {
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding-bottom: var(--player-height);
+        }
+        
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background-color: rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 5;
+        }
+        
+        .search-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 12px 45px 12px 20px;
+            background-color: var(--secondary-black);
+            border: none;
+            border-radius: 25px;
+            color: var(--text-white);
+            font-size: 14px;
+        }
+        
+        .search-input:focus {
+            outline: 2px solid var(--accent-green);
+        }
+        
+        .search-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-gray);
+            cursor: pointer;
+        }
+        
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .user-btn {
+            background: none;
+            border: none;
+            color: var(--text-white);
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .user-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-green), var(--light-green));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        /* Content Area */
+        .content-area {
+            padding: 30px;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .tracks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .track-card {
+            background-color: var(--secondary-black);
+            border-radius: 8px;
+            padding: 15px;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .track-card:hover {
+            background-color: #2a2a2a;
+            transform: translateY(-5px);
+        }
+        
+        .album-art {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--accent-green), var(--light-green));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: white;
+        }
+        
+        .track-info {
+            margin-bottom: 10px;
+        }
+        
+        .track-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .track-artist {
+            color: var(--text-gray);
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .track-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* CSS-only Play Button */
+        .css-play-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: var(--accent-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-black);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .css-play-btn:hover {
+            background-color: var(--light-green);
+            transform: scale(1.05);
+        }
+        
+        /* CSS-only Player Controls */
+        .player-controls-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 500px;
+        }
+        
+        .control-buttons {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .control-btn {
+            background: none;
+            border: none;
+            color: var(--text-gray);
+            cursor: pointer;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        
+        .control-btn:hover {
+            color: var(--text-white);
+        }
+        
+        .play-pause-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: var(--text-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-black);
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .play-pause-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        /* CSS-only audio player using iframes */
+        .audio-frame-container {
+            position: fixed;
+            bottom: var(--player-height);
+            left: var(--sidebar-width);
+            right: 0;
+            height: 0;
+            overflow: hidden;
+            background: var(--secondary-black);
+            transition: height 0.3s;
+            z-index: 90;
+        }
+        
+        /* Hide/show audio player with CSS only */
+        #toggle-player:checked ~ .main-content .audio-frame-container {
+            height: 60px;
+            padding: 10px;
+        }
+        
+        /* Track selection with CSS only */
+        .track-selector {
+            display: none;
+        }
+        
+        .track-player-frame {
+            width: 100%;
+            height: 40px;
+            border: none;
+            background: transparent;
+        }
+        
+        /* Now Playing Bar */
+        .now-playing-bar {
+            position: fixed;
+            bottom: 0;
+            left: var(--sidebar-width);
+            right: 0;
+            height: var(--player-height);
+            background-color: var(--secondary-black);
+            border-top: 1px solid #333;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            z-index: 100;
+        }
+        
+        .now-playing-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 25%;
+        }
+        
+        .now-playing-art {
+            width: 56px;
+            height: 56px;
+            border-radius: 5px;
+            background: linear-gradient(135deg, var(--accent-green), var(--light-green));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+        }
+        
+        .now-playing-text .track-title {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .now-playing-text .track-artist {
+            font-size: 12px;
+        }
+        
+        .player-controls {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 500px;
+        }
+        
+        .progress-container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .progress-time {
+            font-size: 12px;
+            color: var(--text-gray);
+            min-width: 40px;
+        }
+        
+        .progress-bar {
+            flex: 1;
+            height: 4px;
+            background-color: #535353;
+            border-radius: 2px;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: var(--accent-green);
+            border-radius: 2px;
+            width: 30%; /* Static progress for demo */
+        }
+        
+        .extra-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 25%;
+            justify-content: flex-end;
+        }
+        
+        .volume-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .volume-bar {
+            width: 80px;
+            height: 4px;
+            background-color: #535353;
+            border-radius: 2px;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .volume-level {
+            height: 100%;
+            background-color: var(--accent-green);
+            border-radius: 2px;
+            width: 70%; /* Static volume for demo */
+        }
+        
+        /* CSS-only search functionality */
+        .search-section {
+            display: none;
+        }
+        
+        #search-toggle:checked ~ .content-area .search-section {
+            display: block;
+        }
+        
+        #search-toggle:checked ~ .content-area .music-section {
+            display: none;
+        }
+        
+        .search-results {
+            margin-top: 20px;
+        }
+        
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .results-count {
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+        
+        /* Track selection with CSS only */
+        .track-label {
+            display: block;
+            cursor: pointer;
+        }
+        
+        .track-selector:checked + .track-card {
+            border: 2px solid var(--accent-green);
+            background-color: #2a2a2a;
+        }
+        
+        /* Show track player when track is selected */
+        #track1:checked ~ .main-content .audio-frame-container .track1-frame,
+        #track2:checked ~ .main-content .audio-frame-container .track2-frame,
+        #track3:checked ~ .main-content .audio-frame-container .track3-frame,
+        #track4:checked ~ .main-content .audio-frame-container .track4-frame,
+        #track5:checked ~ .main-content .audio-frame-container .track5-frame,
+        #track6:checked ~ .main-content .audio-frame-container .track6-frame,
+        #track7:checked ~ .main-content .audio-frame-container .track7-frame,
+        #track8:checked ~ .main-content .audio-frame-container .track8-frame,
+        #track9:checked ~ .main-content .audio-frame-container .track9-frame,
+        #track10:checked ~ .main-content .audio-frame-container .track10-frame {
+            display: block;
+        }
+        
+        /* Update now playing info with CSS only */
+        #track1:checked ~ .main-content .now-playing-bar .track1-info,
+        #track2:checked ~ .main-content .now-playing-bar .track2-info,
+        #track3:checked ~ .main-content .now-playing-bar .track3-info,
+        #track4:checked ~ .main-content .now-playing-bar .track4-info,
+        #track5:checked ~ .main-content .now-playing-bar .track5-info,
+        #track6:checked ~ .main-content .now-playing-bar .track6-info,
+        #track7:checked ~ .main-content .now-playing-bar .track7-info,
+        #track8:checked ~ .main-content .now-playing-bar .track8-info,
+        #track9:checked ~ .main-content .now-playing-bar .track9-info,
+        #track10:checked ~ .main-content .now-playing-bar .track10-info {
+            display: flex;
+        }
+        
+        /* Hide default now playing */
+        .now-playing-bar .default-info {
+            display: flex;
+        }
+        
+        .now-playing-bar .track-info {
+            display: none;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 70px;
+                padding: 20px 10px;
+            }
+            
+            .logo h1, .nav-links span {
+                display: none;
+            }
+            
+            .main-content {
+                margin-left: 70px;
+            }
+            
+            .now-playing-bar {
+                left: 70px;
+            }
+            
+            .audio-frame-container {
+                left: 70px;
+            }
+            
+            .nav-links a {
+                justify-content: center;
+                padding: 15px 0;
+            }
+            
+            .nav-links i {
+                font-size: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .tracks-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .now-playing-info, .extra-controls {
+                width: 30%;
+            }
+            
+            .player-controls {
+                max-width: 40%;
+            }
+            
+            .volume-bar {
+                width: 60px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .sidebar {
+                display: none;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .now-playing-bar {
+                left: 0;
+                padding: 0 10px;
+            }
+            
+            .audio-frame-container {
+                left: 0;
+            }
+            
+            .now-playing-info {
+                width: auto;
+                flex: 1;
+            }
+            
+            .player-controls {
+                display: none;
+            }
+            
+            .extra-controls {
+                width: auto;
+            }
+            
+            .volume-bar {
+                display: none;
+            }
+        }
+        
+        /* Print styles for track listing */
+        .print-track-list {
+            display: none;
+        }
+        
+        @media print {
+            .sidebar, .top-bar, .now-playing-bar, .audio-frame-container {
+                display: none;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                padding-bottom: 0;
+            }
+            
+            .print-track-list {
+                display: block;
+                margin-top: 20px;
+                border-top: 1px solid #ccc;
+                padding-top: 20px;
+            }
+            
+            .print-track-list h3 {
+                color: #333;
+                margin-bottom: 10px;
+            }
+            
+            .print-track-list ul {
+                color: #333;
+                list-style: none;
+            }
+            
+            .print-track-list li {
+                padding: 5px 0;
+                border-bottom: 1px solid #eee;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hidden checkboxes for CSS-only interactivity -->
+    <input type="checkbox" id="toggle-player" style="display: none;">
+    <input type="checkbox" id="search-toggle" style="display: none">
+    
+    <!-- Track selectors (hidden) -->
+    <input type="radio" name="track" id="track1" class="track-selector">
+    <input type="radio" name="track" id="track2" class="track-selector">
+    <input type="radio" name="track" id="track3" class="track-selector">
+    <input type="radio" name="track" id="track4" class="track-selector">
+    <input type="radio" name="track" id="track5" class="track-selector">
+    <input type="radio" name="track" id="track6" class="track-selector">
+    <input type="radio" name="track" id="track7" class="track-selector">
+    <input type="radio" name="track" id="track8" class="track-selector">
+    <input type="radio" name="track" id="track9" class="track-selector">
+    <input type="radio" name="track" id="track10" class="track-selector">
+    
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <span class="logo-icon">♫</span>
+            <h1>Planet Play</h1>
+        </div>
+        
+        <ul class="nav-links">
+            <li><a href="#"><i class="fas fa-home"></i> <span>Home</span></a></li>
+            <li><a href="#"><i class="fas fa-compass"></i> <span>Discover</span></a></li>
+            <li><a href="#"><i class="fas fa-music"></i> <span>Playlists</span></a></li>
+            <li><a href="#"><i class="fas fa-user-friends"></i> <span>Artists</span></a></li>
+            <li><a href="#"><i class="fas fa-chart-line"></i> <span>Charts</span></a></li>
+            <li><a href="#" class="active"><i class="fas fa-play-circle"></i> <span>Player</span></a></li>
+            <li><a href="#"><i class="fas fa-cloud-upload-alt"></i> <span>Upload</span></a></li>
+        </ul>
+        
+        <div class="playlist-section">
+            <h3 style="color: var(--text-gray); font-size: 14px; margin-bottom: 15px;">YOUR LIBRARY</h3>
+            <ul class="nav-links">
+                <li><a href="#"><i class="fas fa-heart"></i> <span>Liked Songs</span></a></li>
+                <li><a href="#"><i class="fas fa-clock"></i> <span>Recently Played</span></a></li>
+                <li><a href="#"><i class="fas fa-download"></i> <span>Downloaded</span></a></li>
+            </ul>
+        </div>
+        
+        <!-- CSS-only player toggle -->
+        <div style="margin-top: 30px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+            <label for="toggle-player" style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                <i class="fas fa-power-off" style="color: var(--accent-green);"></i>
+                <span style="color: var(--text-white);">Toggle Audio Player</span>
+            </label>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Bar with Search -->
+        <div class="top-bar">
+            <div class="search-container">
+                <!-- CSS-only search toggle -->
+                <label for="search-toggle" style="cursor: pointer; width: 100%;">
+                    <input type="text" class="search-input" placeholder="Search for songs, artists, or albums... (Click to search)">
+                </label>
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <div class="user-actions">
+                <button class="user-btn"><i class="far fa-bell"></i></button>
+                <button class="user-btn"><i class="far fa-user"></i></button>
+                <div class="user-avatar">PP</div>
+            </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Music Sections (shown by default) -->
+            <div class="music-section">
+                <h2 class="section-title">Recently Played</h2>
+                
+                <div class="tracks-grid">
+                    <!-- Track 1 -->
+                    <label for="track1" class="track-label">
+                        <div class="track-card">
+                            <div class="album-art">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <div class="track-info">
+                                <div class="track-title">Midnight Dreams</div>
+                                <div class="track-artist">Maria Johnson</div>
+                            </div>
+                            <div class="track-actions">
+                                <div class="track-plays">125K plays</div>
+                                <div class="css-play-btn">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                    
+                    <!-- Track 2 -->
+                    <label for="track2" class="track-label">
+                        <div class="track-card">
+                            <div class="album-art">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <div class="track-info">
+                                <div class="track-title">Ocean Breeze</div>
+                                <div class="track-artist">Sarah Green</div>
+                            </div>
+                            <div class="track-actions">
+                                <div class="track-plays">98K plays</div>
+                                <div class="css-play-btn">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                    
+                    <!-- Track 3 -->
+                    <label for="track3" class="track-label">
+                        <div class="track-card">
+                            <div class="album-art">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <div class="track-info">
+                                <div class="track-title">Urban Legends</div>
+                                <div class="track-artist">Kyle Thompson</div>
+                            </div>
+                            <div class="track-actions">
+                                <div class="track-plays">156K plays</div>
+                                <div class="css-play-btn">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                    
+                    <!-- Track 4 -->
+                    <label for="track4" class="track-label">
+                        <div class="track-card">
+                            <div class="album-art">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <div class="track-info">
+                                <div class="track-title">Sunset Boulevard</div>
+                                <div class="track-artist">Echo Band</div>
+                            </div>
+                            <div class="track-actions">
+                                <div class="track-plays">87K plays</div>
+                                <div class="css-play-btn">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                    
+                    <!-- Track 5 -->
+                    <label for="track5" class="track-label">
+                        <div class="track-card">
+                            <div class="album-art">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <div class="track-info">
+                                <div class="track-title">Neon Lights</div>
+                                <div class="track-artist">DJ Pulse</div>
+                            </div>
+                            <div class="track-actions">
+                                <div class="track-plays">203K plays</div>
+                                <div class="css-play-btn">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                    
+                    <!-- Track 6 -->
+                    <label for="track6" class="track-label">
+                        <div class="track-card">
+                            <div class="album-art">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <div class="track-info">
+                                <div class="track-title">Golden Hour</div>
+                                <div class="track-artist">Luna May</div>
+                            </div>
+                            <div class="track-actions">
+                                <div class="track-plays">142K plays</div>
+                                <div class="css-play-btn">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+                
+                <h2 class="section-title">Popular Tracks</h2>
+                
+                <div class="tracks-grid">
+                    <!-- Track 7 -->
+                    <label for="track7" class="track-label">
+                        <div class="track-card">
+                            <div class="album-art">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <div class="track-info">
+                                <div class="track-title">Electric Feel</div>
+                                <div class="track-artist">The Voltures</div>
+                            </div>
+                            <div class="track-actions">
+                                <div class="track-plays">76K plays</div>
+                                <div class="css-play-btn">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                    
+                    <!-- Track 8 -->
+                    <label for="track8" class="track-label">
+                        <div class="track-card">
+                            <div class="album-art">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <div class="track-info">
+                                <div class="track-title">City Nights</div>
+                                <div class="track-artist">Urban Collective</div>
+                            </div>
+                            <div class="track-actions">
+                                <div class="track-plays">118K plays</div>
+                                <div class="css-play-btn">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                    
+                    <!-- Track 9 -->
+                    <label for="track9" class="track-label">
+                        <div class="track-card">
+                            <div class="album-art">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <div class="track-info">
+                                <div class="track-title">Desert Rose</div>
+                                <div class="track-artist">Sahara Sound</div>
+                            </div>
+                            <div class="track-actions">
+                                <div class="track-plays">64K plays</div>
+                                <div class="css-play-btn">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                    
+                    <!-- Track 10 -->
+                    <label for="track10" class="track-label">
+                        <div class="track-card">
+                            <div class="album-art">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <div class="track-info">
+                                <div class="track-title">Mountain High</div>
+                                <div class="track-artist">The Wanderers</div>
+                            </div>
+                            <div class="track-actions">
+                                <div class="track-plays">53K plays</div>
+                                <div class="css-play-btn">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Search Results (shown when search is toggled) -->
+            <div class="search-section">
+                <div class="results-header">
+                    <h2 class="section-title">Search Results</h2>
+                    <div class="results-count">6 results</div>
+                </div>
+                <div class="tracks-grid">
+                    <!-- Sample search results -->
+                    <label for="track1" class="track-label">
+                        <div class="track-card">
+                            <div class="album-art">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <div class="track-info">
+                                <div class="track-title">Midnight Dreams</div>
+                                <div class="track-artist">Maria Johnson</div>
+                            </div>
+                            <div class="track-actions">
+                                <div class="track-plays">125K plays</div>
+                                <div class="css-play-btn">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                    
+                    <label for="track5" class="track-label">
+                        <div class="track-card">
+                            <div class="album-art">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <div class="track-info">
+                                <div class="track-title">Neon Lights</div>
+                                <div class="track-artist">DJ Pulse</div>
+                            </div>
+                            <div class="track-actions">
+                                <div class="track-plays">203K plays</div>
+                                <div class="css-play-btn">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Print-friendly track list -->
+            <div class="print-track-list">
+                <h3>Track List</h3>
+                <ul>
+                    <li>1. Midnight Dreams - Maria Johnson</li>
+                    <li>2. Ocean Breeze - Sarah Green</li>
+                    <li>3. Urban Legends - Kyle Thompson</li>
+                    <li>4. Sunset Boulevard - Echo Band</li>
+                    <li>5. Neon Lights - DJ Pulse</li>
+                    <li>6. Golden Hour - Luna May</li>
+                    <li>7. Electric Feel - The Voltures</li>
+                    <li>8. City Nights - Urban Collective</li>
+                    <li>9. Desert Rose - Sahara Sound</li>
+                    <li>10. Mountain High - The Wanderers</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Audio Player Container (shown when toggle is checked) -->
+        <div class="audio-frame-container">
+            <!-- Each iframe is shown based on which track is selected -->
+            <iframe src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=0" 
+                    class="track-player-frame track1-frame" 
+                    title="Midnight Dreams" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen style="display: none;"></iframe>
+            
+            <iframe src="https://www.youtube.com/embed/mvxLW5yV_t4?autoplay=0" 
+                    class="track-player-frame track2-frame" 
+                    title="Ocean Breeze" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen style="display: none;"></iframe>
+            
+            <iframe src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=0" 
+                    class="track-player-frame track3-frame" 
+                    title="Urban Legends" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen style="display: none;"></iframe>
+            
+            <iframe src="https://www.youtube.com/embed/mvxLW5yV_t4?autoplay=0" 
+                    class="track-player-frame track4-frame" 
+                    title="Sunset Boulevard" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen style="display: none;"></iframe>
+            
+            <iframe src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=0" 
+                    class="track-player-frame track5-frame" 
+                    title="Neon Lights" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen style="display: none;"></iframe>
+        </div>
+    </div>
+
+    <!-- Now Playing Bar -->
+    <div class="now-playing-bar">
+        <div class="now-playing-info default-info">
+            <div class="now-playing-art">
+                <i class="fas fa-music"></i>
+            </div>
+            <div class="now-playing-text">
+                <div class="track-title">Select a track</div>
+                <div class="track-artist">Artist</div>
+            </div>
+            <button class="action-btn"><i class="far fa-heart"></i></button>
+        </div>
+        
+        <!-- Track 1 Info -->
+        <div class="now-playing-info track1-info" style="display: none;">
+            <div class="now-playing-art">
+                <i class="fas fa-music"></i>
+            </div>
+            <div class="now-playing-text">
+                <div class="track-title">Midnight Dreams</div>
+                <div class="track-artist">Maria Johnson</div>
+            </div>
+            <button class="action-btn"><i class="far fa-heart"></i></button>
+        </div>
+        
+        <!-- Track 2 Info -->
+        <div class="now-playing-info track2-info" style="display: none;">
+            <div class="now-playing-art">
+                <i class="fas fa-music"></i>
+            </div>
+            <div class="now-playing-text">
+                <div class="track-title">Ocean Breeze</div>
+                <div class="track-artist">Sarah Green</div>
+            </div>
+            <button class="action-btn"><i class="far fa-heart"></i></button>
+        </div>
+        
+        <!-- Track 3 Info -->
+        <div class="now-playing-info track3-info" style="display: none;">
+            <div class="now-playing-art">
+                <i class="fas fa-music"></i>
+            </div>
+            <div class="now-playing-text">
+                <div class="track-title">Urban Legends</div>
+                <div class="track-artist">Kyle Thompson</div>
+            </div>
+            <button class="action-btn"><i class="far fa-heart"></i></button>
+        </div>
+        
+        <!-- Track 4 Info -->
+        <div class="now-playing-info track4-info" style="display: none;">
+            <div class="now-playing-art">
+                <i class="fas fa-music"></i>
+            </div>
+            <div class="now-playing-text">
+                <div class="track-title">Sunset Boulevard</div>
+                <div class="track-artist">Echo Band</div>
+            </div>
+            <button class="action-btn"><i class="far fa-heart"></i></button>
+        </div>
+        
+        <!-- Track 5 Info -->
+        <div class="now-playing-info track5-info" style="display: none;">
+            <div class="now-playing-art">
+                <i class="fas fa-music"></i>
+            </div>
+            <div class="now-playing-text">
+                <div class="track-title">Neon Lights</div>
+                <div class="track-artist">DJ Pulse</div>
+            </div>
+            <button class="action-btn"><i class="far fa-heart"></i></button>
+        </div>
+        
+        <div class="player-controls">
+            <div class="control-buttons">
+                <button class="control-btn" title="Shuffle">
+                    <i class="fas fa-random"></i>
+                </button>
+                <button class="control-btn" title="Previous">
+                    <i class="fas fa-step-backward"></i>
+                </button>
+                <label for="toggle-player" style="cursor: pointer;">
+                    <div class="play-pause-btn">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </label>
+                <button class="control-btn" title="Next">
+                    <i class="fas fa-step-forward"></i>
+                </button>
+                <button class="control-btn" title="Repeat">
+                    <i class="fas fa-redo"></i>
+                </button>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-time">1:30</div>
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+                <div class="progress-time">3:45</div>
+            </div>
+        </div>
+        
+        <div class="extra-controls">
+            <button class="control-btn" title="Lyrics">
+                <i class="fas fa-microphone"></i>
+            </button>
+            <button class="control-btn" title="Queue">
+                <i class="fas fa-list"></i>
+            </button>
+            <div class="volume-container">
+                <button class="control-btn" title="Volume">
+                    <i class="fas fa-volume-up"></i>
+                </button>
+                <div class="volume-bar">
+                    <div class="volume-level"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,118 @@
+/* Reset and base styles */
+:root {
+    --primary-black: #000000;
+    --light-black: #333333;
+    --accent-green: #1db954;
+    --light-green: #1ed760;
+    --xtra-light-green: #BAFFD2;
+    --xtra-light-gray: #E1E1E1;
+    --text-gray: #b3b3b3;
+}
+
+.cart-icon {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-around; /* Changed from space-between for equal spacing */
+    background-color: var(--light-black);
+    top: 90%;
+    left: 50%;
+    transform: translateX(-50%); /* Center horizontally */
+    border-radius: 10px;
+    border: 2px solid var(--accent-green); /* Added border property */
+    height: 60px; /* Increased for better touch targets */
+    width: 280px; /* Increased to accommodate 4 icons */
+    z-index: 999;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    padding: 0 10px; /* Added padding */
+}
+
+.icon-box {
+    display: flex; /* Changed from flexbox */
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-black);
+    background-color: var(--accent-green);
+    border-radius: 7px;
+    border: 2px solid var(--text-gray);
+    height: 44px;
+    width: 44px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.icon-box:hover {
+    background-color: var(--xtra-light-green);
+    transform: translateY(-3px);
+    border: 2px solid var(--text-gray);
+}
+
+
+.icon-box i:hover {
+    font-size: 20px;
+    color: var(--accent-green);
+}
+
+.icon-box i {
+    font-size: 20px;
+    color: var(--xtra-light-gray);
+}
+
+.shadow-background {
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+    position: fixed;
+    top: 90%;
+    left: auto;
+    width: 100%;
+    height: 100px;
+    pointer-events: none; /* Allows clicks to pass through */
+    z-index: 998;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .cart-icon {
+        top: auto;
+        bottom: 20px; /* Better for mobile */
+        width: 90%;
+        max-width: 300px;
+        height: 56px;
+    }
+    
+    .shadow-background {
+        top: auto;
+        bottom: 0;
+        background: linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+    }
+    
+    .icon-box {
+        height: 40px;
+        width: 40px;
+    }
+    
+    .icon-box i {
+        font-size: 18px;
+    }
+}
+
+/* For very small screens */
+@media (max-width: 480px) {
+    .cart-icon {
+        width: 95%;
+        height: 52px;
+    }
+    
+    .icon-box {
+        height: 36px;
+        width: 36px;
+    }
+    
+    .icon-box i {
+        font-size: 16px;
+    }
+}

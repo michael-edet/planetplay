@@ -3,451 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
     <title>Artist Portal | Planet Play</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="/Assets/image/logo/20240428_221650.png" rel="icon">
+    <link rel="apple-touch-icon" href="/Assets/image/logo/20240428_221650.png">
+    <link rel="stylesheet" href="/Assets/css/floating-bottun.css">
+    <link rel="stylesheet" href="/Assets/css/user-portal.css">
+    <link rel="stylesheet" href="/Assets/css/logo.css">
     <style>
-        :root {
-            --primary-black: #121212;
-            --secondary-black: #1e1e1e;
-            --accent-green: #1db954;
-            --light-green: #1ed760;
-            --text-white: #ffffff;
-            --text-gray: #b3b3b3;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: var(--primary-black);
-            color: var(--text-white);
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        /* Header Styles */
-        header {
-            background-color: var(--secondary-black);
-            padding: 20px 0;
-            border-bottom: 2px solid var(--accent-green);
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .logo h1 {
-            font-size: 28px;
-            font-weight: 700;
-            background: linear-gradient(to right, var(--accent-green), var(--light-green));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .logo-icon {
-            font-size: 24px;
-            color: var(--accent-green);
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-        
-        nav a {
-            color: var(--text-white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        nav a:hover, nav a.active {
-            color: var(--accent-green);
-        }
-        
-        /* Auth Section Styles */
-        .auth-container {
-            display: flex;
-            min-height: calc(100vh - 200px);
-            align-items: center;
-            justify-content: center;
-            padding: 40px 0;
-        }
-        
-        .auth-box {
-            background-color: var(--secondary-black);
-            border-radius: 10px;
-            width: 100%;
-            max-width: 450px;
-            padding: 40px;
-            border: 1px solid #333;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-        
-        .auth-tabs {
-            display: flex;
-            margin-bottom: 30px;
-            border-bottom: 1px solid #333;
-        }
-        
-        .auth-tab {
-            flex: 1;
-            text-align: center;
-            padding: 15px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-            border-bottom: 3px solid transparent;
-        }
-        
-        .auth-tab.active {
-            color: var(--accent-green);
-            border-bottom: 3px solid var(--accent-green);
-        }
-        
-        .auth-form {
-            display: none;
-        }
-        
-        .auth-form.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .form-title {
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 24px;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 12px 15px;
-            background-color: var(--primary-black);
-            border: 1px solid #333;
-            border-radius: 5px;
-            color: var(--text-white);
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-        
-        .form-group input:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--accent-green);
-        }
-        
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-        
-        .checkbox-group {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        
-        .checkbox-group input {
-            margin-top: 5px;
-        }
-        
-        .checkbox-group label {
-            font-size: 14px;
-            color: var(--text-gray);
-        }
-        
-        .checkbox-group a {
-            color: var(--accent-green);
-            text-decoration: none;
-        }
-        
-        .checkbox-group a:hover {
-            text-decoration: underline;
-        }
-        
-        .submit-btn {
-            background-color: var(--accent-green);
-            color: var(--primary-black);
-            border: none;
-            padding: 12px 30px;
-            border-radius: 5px;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            width: 100%;
-            margin-top: 10px;
-        }
-        
-        .submit-btn:hover {
-            background-color: var(--light-green);
-        }
-        
-        .divider {
-            text-align: center;
-            margin: 25px 0;
-            position: relative;
-            color: var(--text-gray);
-        }
-        
-        .divider::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background-color: #333;
-        }
-        
-        .divider span {
-            background-color: var(--secondary-black);
-            padding: 0 15px;
-            position: relative;
-        }
-        
-        .social-login {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .social-btn {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 12px;
-            border: 1px solid #333;
-            border-radius: 5px;
-            background-color: var(--primary-black);
-            color: var(--text-white);
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .social-btn:hover {
-            background-color: #2a2a2a;
-        }
-        
-        .auth-footer {
-            text-align: center;
-            margin-top: 25px;
-            color: var(--text-gray);
-            font-size: 14px;
-        }
-        
-        .auth-footer a {
-            color: var(--accent-green);
-            text-decoration: none;
-        }
-        
-        .auth-footer a:hover {
-            text-decoration: underline;
-        }
-        
-        .forgot-password {
-            text-align: right;
-            margin-top: -10px;
-            margin-bottom: 20px;
-        }
-        
-        .forgot-password a {
-            color: var(--accent-green);
-            text-decoration: none;
-            font-size: 14px;
-        }
-        
-        .forgot-password a:hover {
-            text-decoration: underline;
-        }
-        
-        /* Artist Benefits Section */
-        .artist-benefits {
-            background-color: var(--secondary-black);
-            padding: 60px 0;
-            margin-top: auto;
-        }
-        
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 30px;
-        }
-        
-        .benefit-card {
-            text-align: center;
-            padding: 30px 20px;
-        }
-        
-        .benefit-icon {
-            width: 70px;
-            height: 70px;
-            background-color: var(--accent-green);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 28px;
-        }
-        
-        .benefit-card h3 {
-            font-size: 18px;
-            margin-bottom: 15px;
-            color: var(--accent-green);
-        }
-        
-        .benefit-card p {
-            color: var(--text-gray);
-            font-size: 14px;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--secondary-black);
-            padding: 40px 0;
-            border-top: 2px solid var(--accent-green);
-        }
-        
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 30px;
-        }
-        
-        .footer-section {
-            flex: 1;
-            min-width: 250px;
-        }
-        
-        .footer-section h3 {
-            font-size: 20px;
-            margin-bottom: 20px;
-            color: var(--accent-green);
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-        
-        .footer-links a {
-            color: var(--text-gray);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-links a:hover {
-            color: var(--accent-green);
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .social-icon {
-            width: 40px;
-            height: 40px;
-            background-color: #333;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-white);
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
-        
-        .social-icon:hover {
-            background-color: var(--accent-green);
-        }
-        
-        .copyright {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #333;
-            color: var(--text-gray);
-            font-size: 14px;
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 20px;
-            }
-            
-            nav ul {
-                gap: 15px;
-            }
-            
-            .auth-box {
-                padding: 30px 20px;
-            }
-            
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-            
-            .social-login {
-                flex-direction: column;
-            }
-            
-            .benefits-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+    
     </style>
 </head>
 <body>
@@ -460,10 +26,10 @@
             </div> -->
             <div class="header-content">
                 <div class="logo">
-                    <span class="logo-icon">♫</span>
+               <span class="logo-icon"><img src="/Assets/image/logo/20240428_221650.png"></span>
                     <h1>Planet Play</h1>
                 </div>
-                <nav>
+            <!--    <nav>
                     <ul>
                         <li><a href="/index.html" >Home</a></li>
                         <li><a href="/Assets/Subpage/platforms.html">Platforms</a></li>
@@ -471,7 +37,7 @@
                         <li><a href="/Assets/Subpage/artist-lebel.html">Artists</a></li>
                         <li><a href="/Assets/Subpage/contact.html">Contact</a></li>
                     </ul>
-                </nav>
+                </nav> -->
             </div>
         </div>
     </header>
@@ -519,7 +85,7 @@
                             <a href="#">Forgot your password?</a>
                         </div>
                         
-                        <button type="submit" class="submit-btn">Login to Your Account</button>
+                        <button type="submit" class="submit-btn"><a href="/Assets/ backend/dashboard.html">Login to Your Account</a></button>
                     </form>
                     
                     <div class="auth-footer">
@@ -618,7 +184,7 @@
                             <label for="newsletter">Send me updates about new features and opportunities</label>
                         </div>
                         
-                        <button type="submit" class="submit-btn">Create Artist Account</button>
+                        <button type="submit" class="submit-btn"><a href="/Assets/ backend/dashboard.html">Create Artist Account</a></button>
                     </form>
                     
                     <div class="auth-footer">
@@ -721,6 +287,28 @@
             </div>
         </div>
     </footer>
+    
+        <div class="container">
+        
+    </div>
+    
+    <!-- Floating navigation bar -->
+<div class="cart-icon">
+    <div class="icon-box"><a href="/Assets/Subpage/submit.html">
+        <i class="fas fa-cloud-upload-alt"></i></a>
+    </div>
+    <div class="icon-box"><a href="/index.html">
+        <i class="fas fa-house"></i></a>
+    </div>
+    <div class="icon-box"><a href="/Assets/ backend/authentication/user-portal.html">
+        <i class="fas fa-user"></i></a>
+    </div>
+    <div class="icon-box"><a href="/Assets/pages/library/music-home.html">
+            <i class="fas fa-music"></i></a>
+    </div>
+</div>
+<div class="shadow-background"></div>
+
 
     <script>
         // Tab switching functionality
@@ -846,5 +434,6 @@
             });
         });
     </script>
+    <script src="/Assets/pageloader/loader-all-in-one.js"></script>
 </body>
 </html>

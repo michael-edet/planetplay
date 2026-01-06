@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planet Play | Music Promotion Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-black: #121212;
+            --secondary-black: #1e1e1e;
+            --accent-green: #1db954;
+            --light-green: #1ed760;
+            --text-white: #ffffff;
+            --text-gray: #b3b3b3;
+            --gradient-green: linear-gradient(135deg, #1db954, #1ed760);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--primary-black);
+            color: var(--text-white);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--secondary-black);
+            padding: 15px 0;
+            border-bottom: 2px solid var(--accent-green);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background-color: rgba(30, 30, 30, 0.95);
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .auth-section {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .auth-btn {
+            background-color: transparent;
+            color: var(--text-white);
+            border: 1px solid var(--accent-green);
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .auth-btn:hover {
+            background-color: var(--accent-green);
+            color: var(--primary-black);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 32px;
+            font-weight: 800;
+            background: var(--gradient-green);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .logo-icon {
+            font-size: 28px;
+            color: var(--accent-green);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: var(--text-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 16px;
+            position: relative;
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--accent-green);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-green);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.9)), 
+                        url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 120px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-green);
+            opacity: 0.05;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .hero h2 {
+            font-size: 64px;
+            margin-bottom: 25px;
+            background: var(--gradient-green);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .hero-subtitle {
+            font-size: 24px;
+            margin-bottom: 40px;
+            color: var(--text-gray);
+            font-weight: 300;
+            line-height: 1.6;
+        }
+        
+        .hero-highlight {
+            background: rgba(29, 185, 84, 0.1);
+            border-left: 4px solid var(--accent-green);
+            padding: 25px;
+            margin: 40px 0;
+            text-align: left;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .hero-highlight p {
+            font-size: 20px;
+            color: var(--text-white);
+            font-style: italic;
+            line-height: 1.8;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--gradient-green);
+            color: var(--primary-black);
+            padding: 16px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(29, 185, 84, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(29, 185, 84, 0.4);
+        }
+        
+        /* Section Common Styles */
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+            font-size: 42px;
+            position: relative;
+            font-weight: 700;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--gradient-green);
+            margin: 20px auto 30px;
+            border-radius: 2px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+            font-size: 20px;
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+        
+        /* History Section */
+        .history-section {
+            background-color: var(--secondary-black);
+        }
+        
+        .history-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .history-timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .history-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--gradient-green);
+            border-radius: 3px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+            padding-left: 30px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -40px;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            border: 3px solid var(--primary-black);
+            box-shadow: 0 0 0 3px var(--accent-green);
+        }
+        
+        .timeline-year {
+            font-size: 24px;
+            color: var(--accent-green);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-content {
+            background: rgba(29, 185, 84, 0.05);
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-green);
+        }
+        
+        .timeline-content h4 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--text-white);
+        }
+        
+        .timeline-content p {
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+        
+        /* Purpose Section */
+        .purpose-section {
+            background-color: var(--primary-black);
+        }
+        
+        .purpose-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .purpose-card {
+            background: var(--secondary-black);
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #333;
+        }
+        
+        .purpose-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent-green);
+        }
+        
+        .purpose-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 32px;
+            color: var(--primary-black);
+        }
+        
+        .purpose-card h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--accent-green);
+        }
+        
+        .purpose-card p {
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+        
+        /* Platforms Showcase */
+        .platforms-showcase {
+            margin-top: 80px;
+        }
+        
+        .platforms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .platform-item {
+            background: rgba(29, 185, 84, 0.05);
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid #333;
+            transition: all 0.3s;
+        }
+        
+        .platform-item:hover {
+            border-color: var(--accent-green);
+            transform: translateY(-5px);
+        }
+        
+        .platform-logo {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: var(--accent-green);
+        }
+        
+        .platform-name {
+            font-size: 20px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .platform-stats {
+            font-size: 14px;
+            color: var(--text-gray);
+        }
+        
+        /* Service Section */
+        .service-section {
+            background-color: var(--secondary-black);
+        }
+        
+        .service-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .service-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .feature-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        
+        .feature-number {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--primary-black);
+            flex-shrink: 0;
+        }
+        
+        .feature-content h4 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--accent-green);
+        }
+        
+        .feature-content p {
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+        
+        /* Process Flow */
+        .process-flow {
+            margin-top: 80px;
+        }
+        
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 50px;
+        }
+        
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: var(--gradient-green);
+            z-index: 0;
+        }
+        
+        .process-step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            width: 20%;
+        }
+        
+        .step-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--secondary-black);
+            border: 2px solid var(--accent-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 24px;
+            color: var(--accent-green);
+            position: relative;
+        }
+        
+        .step-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--text-white);
+            font-weight: 600;
+        }
+        
+        .step-description {
+            font-size: 14px;
+            color: var(--text-gray);
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            background-color: var(--primary-black);
+            text-align: center;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .contact-method {
+            background: var(--secondary-black);
+            border-radius: 15px;
+            padding: 40px 30px;
+            transition: all 0.3s;
+            border: 1px solid #333;
+        }
+        
+        .contact-method:hover {
+            border-color: var(--accent-green);
+            transform: translateY(-5px);
+        }
+        
+        .contact-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 28px;
+            color: var(--primary-black);
+        }
+        
+        .contact-method h4 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--accent-green);
+        }
+        
+        .contact-link {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+            margin-top: 15px;
+            transition: color 0.3s;
+        }
+        
+        .contact-link:hover {
+            color: var(--accent-green);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.95)), 
+                        url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-size: 48px;
+            margin-bottom: 30px;
+            color: var(--text-white);
+            font-weight: 700;
+        }
+        
+        .cta-section p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 50px;
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary-black);
+            padding: 60px 0 30px;
+            border-top: 2px solid var(--accent-green);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-section h3 {
+            font-size: 24px;
+            margin-bottom: 25px;
+            color: var(--accent-green);
+        }
+        
+        .footer-section p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 16px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-green);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            background-color: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-white);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 18px;
+        }
+        
+        .social-icon:hover {
+            background: var(--gradient-green);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero h2 {
+                font-size: 52px;
+            }
+            
+            .section-title {
+                font-size: 36px;
+            }
+            
+            .process-steps {
+                flex-wrap: wrap;
+            }
+            
+            .process-step {
+                width: 45%;
+                margin-bottom: 40px;
+            }
+            
+            .process-steps::before {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h2 {
+                font-size: 42px;
+            }
+            
+            .hero-subtitle {
+                font-size: 20px;
+            }
+            
+            .section {
+                padding: 70px 0;
+            }
+            
+            .process-step {
+                width: 100%;
+            }
+            
+            .auth-section {
+                flex-direction: column;
+                width: 100%;
+                align-items: center;
+            }
+            
+            .auth-btn {
+                width: 180px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h2 {
+                font-size: 36px;
+            }
+            
+            .hero-subtitle {
+                font-size: 18px;
+            }
+            
+            .section-title {
+                font-size: 32px;
+            }
+            
+            .timeline-item {
+                padding-left: 20px;
+            }
+            
+            .timeline-item::before {
+                left: -35px;
+            }
+            
+            .cta-button {
+                padding: 14px 30px;
+                font-size: 16px;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: var(--gradient-green);
+            z-index: 1001;
+            transition: width 0.2s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+    
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <!-- Top Center Login/Signup Section -->
+            <div class="header-top">
+                <div class="auth-section">
+                    <button class="auth-btn">Artist Login</button>
+                    <button class="auth-btn">Label Sign Up</button>
+                </div>
+            </div>
+            
+            <!-- Main Header Content -->
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">♫</span>
+                    <h1>PLANET PLAY</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home" class="active">Home</a></li>
+                        <li><a href="#history">History</a></li>
+                        <li><a href="#purpose">Purpose</a></li>
+                        <li><a href="#service">Service</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content animate-fadeInUp">
+                <h2>ELEVATE YOUR MUSIC CAREER</h2>
+                <div class="hero-subtitle">
+                    Planet Play is a revolutionary music promotion platform dedicated to illuminating 
+                    artistic concepts and propelling careers into professional dimensions through 
+                    strategic playlist placement and digital amplification.
+                </div>
+                
+                <div class="hero-highlight">
+                    <p>
+                        "We transform musical talent into streaming success by bridging the gap 
+                        between emerging artists and established platforms, creating pathways 
+                        to recognition that were previously inaccessible."
+                    </p>
+                </div>
+                
+                <a href="#contact" class="cta-button">BEGIN YOUR ASCENSION</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- History Section -->
+    <section class="section history-section" id="history">
+        <div class="container">
+            <h2 class="section-title">OUR ORIGIN STORY</h2>
+            <div class="section-subtitle">
+                From a single artist's vision to a comprehensive promotional ecosystem, 
+                discover the journey that created Planet Play.
+            </div>
+            
+            <div class="history-content">
+                <div class="history-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">Early 2024</div>
+                        <div class="timeline-content">
+                            <h4>The Genesis</h4>
+                            <p>
+                                Planet Play was founded by Michael Edet as a personal initiative 
+                                to elevate his own musical career. What began as a solo endeavor 
+                                quickly revealed the universal challenges faced by artists in 
+                                achieving visibility and professional recognition in an increasingly 
+                                saturated digital landscape.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-year">Mid 2024</div>
+                        <div class="timeline-content">
+                            <h4>Vision Expansion</h4>
+                            <p>
+                                Recognizing the broader application of his promotional strategies, 
+                                Michael expanded Planet Play's mission to benefit fellow artists. 
+                                The platform evolved into a collective promotional space, welcoming 
+                                both established professionals and emerging talents seeking 
+                                meaningful audience engagement.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-year">Present Day</div>
+                        <div class="timeline-content">
+                            <h4>Digital-First Ecosystem</h4>
+                            <p>
+                                Today, Planet Play operates as a purely digital entity with no 
+                                physical headquarters. Our presence is strategically concentrated 
+                                on Instagram, Facebook, and X (Twitter), where we maintain active 
+                                communities, provide artist support, and showcase success stories. 
+                                This borderless approach allows us to serve artists globally.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Purpose Section -->
+    <section class="section purpose-section" id="purpose">
+        <div class="container">
+            <h2 class="section-title">OUR MANDATE</h2>
+            <div class="section-subtitle">
+                We exist to elevate musical careers through strategic digital placement, 
+                creating pathways to professional recognition and sustainable success.
+            </div>
+            
+            <div class="purpose-grid">
+                <div class="purpose-card">
+                    <div class="purpose-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Career Elevation</h3>
+                    <p>
+                        We systematically advance artists from obscurity to recognition 
+                        by positioning their work in high-visibility digital spaces, 
+                        transforming potential into measurable streaming success.
+                    </p>
+                </div>
+                
+                <div class="purpose-card">
+                    <div class="purpose-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>Strategic Placement</h3>
+                    <p>
+                        Through curated playlist integration across major platforms, 
+                        we ensure music reaches precisely targeted audiences most 
+                        likely to appreciate and engage with each artistic vision.
+                    </p>
+                </div>
+                
+                <div class="purpose-card">
+                    <div class="purpose-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Digital Amplification</h3>
+                    <p>
+                        We leverage the interconnected nature of modern streaming 
+                        platforms to create amplification effects that extend 
+                        reach far beyond individual playlist placements.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="platforms-showcase">
+                <h3 class="section-title" style="font-size: 32px; margin-bottom: 40px;">OUR PLATFORM PRESENCE</h3>
+                <div class="platforms-grid">
+                    <div class="platform-item">
+                        <div class="platform-logo">
+                            <i class="fab fa-spotify"></i>
+                        </div>
+                        <div class="platform-name">Spotify</div>
+                        <div class="platform-stats">3 Curated Playlists • 2.4M+ Streams</div>
+                    </div>
+                    
+                    <div class="platform-item">
+                        <div class="platform-logo">
+                            <i class="fas fa-music"></i>
+                        </div>
+                        <div class="platform-name">Boomplay</div>
+                        <div class="platform-stats">3 Curated Playlists • 1.7M+ Streams</div>
+                    </div>
+                    
+                    <div class="platform-item">
+                        <div class="platform-logo">
+                            <i class="fab fa-soundcloud"></i>
+                        </div>
+                        <div class="platform-name">SoundCloud</div>
+                        <div class="platform-stats">3 Curated Playlists • 1.1M+ Plays</div>
+                    </div>
+                    
+                    <div class="platform-item">
+                        <div class="platform-logo">
+                            <i class="fas fa-headphones"></i>
+                        </div>
+                        <div class="platform-name">Audiomack</div>
+                        <div class="platform-stats">3 Curated Playlists • 890K+ Plays</div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 40px; color: var(--text-gray);">
+                    <p><strong>Signature Playlists:</strong> Afro Planet • Hip-Hop Planet • Radio Planet</p>
+                    <p>Each playlist accumulates substantial streaming metrics across all platforms, creating compound visibility effects.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Section -->
+    <section class="section service-section" id="service">
+        <div class="container">
+            <h2 class="section-title">OUR SERVICE ECOSYSTEM</h2>
+            <div class="section-subtitle">
+                We facilitate direct partnerships between our promotional infrastructure 
+                and musical talent, creating mutually beneficial pathways to audience growth.
+            </div>
+            
+            <div class="service-content">
+                <div style="max-width: 800px; margin: 0 auto 50px; background: rgba(29, 185, 84, 0.05); padding: 30px; border-radius: 10px; border-left: 4px solid var(--accent-green);">
+                    <p style="font-size: 20px; color: var(--text-white); line-height: 1.8; margin-bottom: 0;">
+                        Planet Play operates through direct engagement with artists and labels, 
+                        building sustainable fanbases by strategically positioning musical content 
+                        within our curated playlists according to mutually agreed terms.
+                    </p>
+                </div>
+                
+                <div class="service-features">
+                    <div class="feature-item">
+                        <div class="feature-number">1</div>
+                        <div class="feature-content">
+                            <h4>Direct Artist Partnerships</h4>
+                            <p>
+                                We establish personalized working relationships with each client, 
+                                ensuring promotional strategies align with artistic vision and 
+                                career objectives.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-number">2</div>
+                        <div class="feature-content">
+                            <h4>Fanbase Development</h4>
+                            <p>
+                                Our approach systematically converts casual listeners into 
+                                dedicated followers through targeted playlist placement and 
+                                engagement optimization.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-number">3</div>
+                        <div class="feature-content">
+                            <h4>Content Integration</h4>
+                            <p>
+                                We carefully position musical content within playlists that 
+                                match genre, mood, and audience demographics for maximum 
+                                impact and organic growth.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="process-flow">
+                    <h3 style="text-align: center; font-size: 32px; margin-bottom: 20px; color: var(--accent-green);">
+                        Onboarding Process
+                    </h3>
+                    <p style="text-align: center; color: var(--text-gray); max-width: 700px; margin: 0 auto 50px;">
+                        To integrate your content into our promotional ecosystem, prospective 
+                        clients must complete our detailed application form or establish 
+                        direct communication with our executive leadership.
+                    </p>
+                    
+                    <div class="process-steps">
+                        <div class="process-step">
+                            <div class="step-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="step-title">Application</div>
+                            <div class="step-description">Complete our detailed client intake form</div>
+                        </div>
+                        
+                        <div class="process-step">
+                            <div class="step-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div class="step-title">Consultation</div>
+                            <div class="step-description">Strategy session with our team</div>
+                        </div>
+                        
+                        <div class="process-step">
+                            <div class="step-icon">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <div class="step-title">Integration</div>
+                            <div class="step-description">Content placement in curated playlists</div>
+                        </div>
+                        
+                        <div class="process-step">
+                            <div class="step-icon">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <div class="step-title">Amplification</div>
+                            <div class="step-description">Continuous performance monitoring</div>
+                        </div>
+                        
+                        <div class="process-step">
+                            <div class="step-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="step-title">Growth</div>
+                            <div class="step-description">Audience expansion and engagement</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact-section" id="contact">
+        <div class="container">
+            <h2 class="section-title">CONNECT WITH US</h2>
+            <div class="section-subtitle">
+                Engage with our digital ecosystem through the channels where we maintain 
+                our most active presence and community engagement.
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-method">
+                    <div class="contact-icon">
+                        <i class="fab fa-facebook-f"></i>
+                    </div>
+                    <h4>Facebook</h4>
+                    <p>Join our community discussions and updates</p>
+                    <a href="#" class="contact-link">@PlanetPlayOfficial</a>
+                </div>
+                
+                <div class="contact-method">
+                    <div class="contact-icon">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <h4>Instagram</h4>
+                    <p>Visual storytelling and artist features</p>
+                    <a href="#" class="contact-link">@Planet_Play_Music</a>
+                </div>
+                
+                <div class="contact-method">
+                    <div class="contact-icon">
+                        <i class="fab fa-twitter"></i>
+                    </div>
+                    <h4>X (Twitter)</h4>
+                    <p>Real-time updates and industry insights</p>
+                    <a href="#" class="contact-link">@PlanetPlayMusic</a>
+                </div>
+                
+                <div class="contact-method">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h4>Email</h4>
+                    <p>Direct professional inquiries</p>
+                    <a href="mailto:info@planetplay.com" class="contact-link">info@planetplay.com</a>
+                </div>
+                
+                <div class="contact-method">
+                    <div class="contact-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h4>WhatsApp</h4>
+                    <p>Direct messaging for consultations</p>
+                    <a href="#" class="contact-link">+1 (234) 567-8900</a>
+                </div>
+                
+                <div class="contact-method">
+                    <div class="contact-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h4>CEO Contact</h4>
+                    <p>Executive-level communication</p>
+                    <a href="#" class="contact-link">Michael Edet</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>READY TO ELEVATE YOUR MUSIC?</h2>
+            <p>
+                Join the growing community of artists who have transformed their careers 
+                through strategic playlist placement and professional digital promotion.
+            </p>
+            <a href="#" class="cta-button">GET STARTED TODAY</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>PLANET PLAY</h3>
+                    <p>
+                        A revolutionary music promotion platform illuminating artistic 
+                        concepts and propelling careers into professional dimensions 
+                        through strategic digital placement.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Navigation</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#history">Our History</a></li>
+                        <li><a href="#purpose">Our Purpose</a></li>
+                        <li><a href="#service">Our Services</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Platform Presence</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Spotify Playlists</a></li>
+                        <li><a href="#">Boomplay Integration</a></li>
+                        <li><a href="#">SoundCloud Network</a></li>
+                        <li><a href="#">Audiomack Placement</a></li>
+                        <li><a href="#">Cross-Platform Strategy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Legal & Information</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Artist Agreement</a></li>
+                        <li><a href="#">Copyright Information</a></li>
+                        <li><a href="#">Data Protection</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2024 Planet Play Music Promotion. All rights reserved. Founded by Michael Edet.</p>
+                <p style="margin-top: 10px; font-size: 12px;">This is a digital platform with no physical office location.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll Progress Bar
+        window.addEventListener('scroll', function() {
+            const scrollProgress = document.getElementById('scrollProgress');
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (window.scrollY / windowHeight) * 100;
+            scrollProgress.style.width = scrolled + '%';
+        });
+        
+        // Smooth Scrolling for Navigation
+        document.querySelectorAll('nav a, .footer-links a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId.startsWith('#')) {
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+        
+        // Active Navigation Highlighting
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('nav a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if(scrollY >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if(link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Auth Button Functionality
+        document.querySelectorAll('.auth-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const action = this.textContent;
+                alert(`Redirecting to ${action} portal...`);
+            });
+        });
+        
+        // Contact Links
+        document.querySelectorAll('.contact-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const platform = this.parentElement.querySelector('h4').textContent;
+                alert(`Opening ${platform} connection...`);
+            });
+        });
+        
+        // CTA Buttons
+        document.querySelectorAll('.cta-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                if(this.getAttribute('href') === '#') {
+                    e.preventDefault();
+                    alert('Redirecting to artist application form...');
+                }
+            });
+        });
+        
+        // Animation on Scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe elements for animation
+        document.querySelectorAll('.purpose-card, .platform-item, .contact-method, .feature-item, .process-step').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(element);
+        });
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Planet Play Platform Loaded');
+        });
+    </script>
+</body>
+</html>

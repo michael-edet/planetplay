@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planet Play | Music Aggregation Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-black: #121212;
+            --secondary-black: #1e1e1e;
+            --accent-green: #1db954;
+            --light-green: #1ed760;
+            --text-white: #ffffff;
+            --text-gray: #b3b3b3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--primary-black);
+            color: var(--text-white);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--secondary-black);
+            padding: 20px 0;
+            border-bottom: 2px solid var(--accent-green);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--accent-green), var(--light-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .logo-icon {
+            font-size: 24px;
+            color: var(--accent-green);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: var(--text-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--accent-green);
+        }
+        
+        /* Login/Signup Section */
+        .auth-section {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            gap: 15px;
+        }
+        
+        .auth-btn {
+            background-color: transparent;
+            color: var(--text-white);
+            border: 1px solid var(--accent-green);
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .auth-btn:hover {
+            background-color: var(--accent-green);
+            color: var(--primary-black);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: var(--text-gray);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-green);
+            color: var(--text-white);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: var(--light-green);
+        }
+        
+        /* Platforms Section */
+        .platforms {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 36px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-green);
+            margin: 15px auto;
+        }
+        
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .platform-card {
+            background-color: var(--secondary-black);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #333;
+        }
+        
+        .platform-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(29, 185, 84, 0.2);
+        }
+        
+        .platform-header {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .platform-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        
+        .platform-name {
+            font-size: 22px;
+            font-weight: 600;
+        }
+        
+        .playlist-list {
+            padding: 20px;
+        }
+        
+        .playlist-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #2a2a2a;
+        }
+        
+        .playlist-item:last-child {
+            border-bottom: none;
+        }
+        
+        .playlist-name {
+            color: var(--text-white);
+        }
+        
+        .play-count {
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary-black);
+            padding: 40px 0;
+            border-top: 2px solid var(--accent-green);
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--accent-green);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-green);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-white);
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--accent-green);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+            
+            .hero h2 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .auth-section {
+                position: static;
+                justify-content: center;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="auth-section">
+                <button class="auth-btn">Login</button>
+                <button class="auth-btn">Sign Up</button>
+            </div>
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">♫</span>
+                    <h1>Planet Play</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Platforms</a></li>
+                        <li><a href="#">Playlists</a></li>
+                        <li><a href="#">Artists</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Your Music, Every Platform</h2>
+            <p>Planet Play aggregates music tracks from artists and record labels to create amazing playlists across all major streaming platforms.</p>
+            <a href="#" class="cta-button">Explore Playlists</a>
+        </div>
+    </section>
+
+    <!-- Platforms Section -->
+    <section class="platforms">
+        <div class="container">
+            <h2 class="section-title">Our Platform Integrations</h2>
+            <div class="platform-grid">
+                <!-- Spotify -->
+                <div class="platform-card">
+                    <div class="platform-header">
+                        <div class="platform-icon">S</div>
+                        <div class="platform-name">Spotify</div>
+                    </div>
+                    
+                    
+                    
+                    <div class="playlist-list">
+                        <div class="playlist-item">
+                            <div class="playlist-name">Chill Vibes Only</div>
+                            <div class="play-count">2.4M plays</div>
+                        </div>
+                        <div class="playlist-item">
+                            <div class="playlist-name">Workout Energy</div>
+                            <div class="play-count">1.8M plays</div>
+                        </div>
+                        <div class="playlist-item">
+                            <div class="playlist-name">Focus Flow</div>
+                            <div class="play-count">1.2M plays</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Apple Music -->
+                <div class="platform-card">
+                    <div class="platform-header">
+                        <div class="platform-icon">A</div>
+                        <div class="platform-name">Apple Music</div>
+                    </div>
+                    <div class="playlist-list">
+                        <div class="playlist-item">
+                            <div class="playlist-name">Indie Discoveries</div>
+                            <div class="play-count">980K plays</div>
+                        </div>
+                        <div class="playlist-item">
+                            <div class="playlist-name">Hip-Hop Essentials</div>
+                            <div class="play-count">1.5M plays</div>
+                        </div>
+                        <div class="playlist-item">
+                            <div class="playlist-name">Electronic Waves</div>
+                            <div class="play-count">750K plays</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Deezer -->
+                <div class="platform-card">
+                    <div class="platform-header">
+                        <div class="platform-icon">D</div>
+                        <div class="platform-name">Deezer</div>
+                    </div>
+                    <div class="playlist-list">
+                        <div class="playlist-item">
+                            <div class="playlist-name">Rock Classics</div>
+                            <div class="play-count">620K plays</div>
+                        </div>
+                        <div class="playlist-item">
+                            <div class="playlist-name">Jazz & Blues</div>
+                            <div class="play-count">410K plays</div>
+                        </div>
+                        <div class="playlist-item">
+                            <div class="playlist-name">Latin Rhythms</div>
+                            <div class="play-count">580K plays</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tidal -->
+                <div class="platform-card">
+                    <div class="platform-header">
+                        <div class="platform-icon">T</div>
+                        <div class="platform-name">Tidal</div>
+                    </div>
+                    <div class="playlist-list">
+                        <div class="playlist-item">
+                            <div class="playlist-name">Hi-Fi Experience</div>
+                            <div class="play-count">320K plays</div>
+                        </div>
+                        <div class="playlist-item">
+                            <div class="playlist-name">R&B Soul</div>
+                            <div class="play-count">450K plays</div>
+                        </div>
+                        <div class="playlist-item">
+                            <div class="playlist-name">Classical Moments</div>
+                            <div class="play-count">280K plays</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SoundCloud -->
+                <div class="platform-card">
+                    <div class="platform-header">
+                        <div class="platform-icon">SC</div>
+                        <div class="platform-name">SoundCloud</div>
+                    </div>
+                    <div class="playlist-list">
+                        <div class="playlist-item">
+                            <div class="playlist-name">Rising Artists</div>
+                            <div class="play-count">890K plays</div>
+                        </div>
+                        <div class="playlist-item">
+                            <div class="playlist-name">Underground Beats</div>
+                            <div class="play-count">720K plays</div>
+                        </div>
+                        <div class="playlist-item">
+                            <div class="playlist-name">DJ Mixes</div>
+                            <div class="play-count">1.1M plays</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- YouTube Music -->
+                <div class="platform-card">
+                    <div class="platform-header">
+                        <div class="platform-icon">YT</div>
+                        <div class="platform-name">YouTube Music</div>
+                    </div>
+                    <div class="playlist-list">
+                        <div class="playlist-item">
+                            <div class="playlist-name">Trending Now</div>
+                            <div class="play-count">2.1M plays</div>
+                        </div>
+                        <div class="playlist-item">
+                            <div class="playlist-name">Throwback Hits</div>
+                            <div class="play-count">1.6M plays</div>
+                        </div>
+                        <div class="playlist-item">
+                            <div class="playlist-name">Music Videos</div>
+                            <div class="play-count">3.2M plays</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Boomplay -->
+                <div class="platform-card">
+                    <div class="platform-header">
+                        <div class="platform-icon">B</div>
+                        <div class="platform-name">Boomplay</div>
+                    </div>
+                    <div class="playlist-list">
+                        <div class="playlist-item">
+                            <div class="playlist-name">Afrobeats Heat</div>
+                            <div class="play-count">1.3M plays</div>
+                        </div>
+                        <div class="playlist-item">
+                            <div class="playlist-name">African Grooves</div>
+                            <div class="play-count">950K plays</div>
+                        </div>
+                        <div class="playlist-item">
+                            <div class="playlist-name">Naija Hits</div>
+                            <div class="play-count">1.7M plays</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Audiomax -->
+                <div class="platform-card">
+                    <div class="platform-header">
+                        <div class="platform-icon">AM</div>
+                        <div class="platform-name">Audiomax</div>
+                    </div>
+                    <div class="playlist-list">
+                        <div class="playlist-item">
+                            <div class="playlist-name">Premium Sound</div>
+                            <div class="play-count">420K plays</div>
+                        </div>
+                        <div class="playlist-item">
+                            <div class="playlist-name">Studio Quality</div>
+                            <div class="play-count">380K plays</div>
+                        </div>
+                        <div class="playlist-item">
+                            <div class="playlist-name">Audiophile Picks</div>
+                            <div class="play-count">290K plays</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Planet Play</h3>
+                    <p>Aggregating music across all platforms to deliver the perfect listening experience.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Platforms</a></li>
+                        <li><a href="#">Playlists</a></li>
+                        <li><a href="#">Artists</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Platforms</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Spotify</a></li>
+                        <li><a href="#">Apple Music</a></li>
+                        <li><a href="#">Deezer</a></li>
+                        <li><a href="#">Tidal</a></li>
+                        <li><a href="#">SoundCloud</a></li>
+                        <li><a href="#">YouTube Music</a></li>
+                        <li><a href="#">Boomplay</a></li>
+                        <li><a href="#">Audiomax</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li>Email: info@planetplay.com</li>
+                        <li>Phone: +1 (555) 123-4567</li>
+                        <li>Address: 123 Music Ave, Sound City</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Planet Play. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple animation for platform cards on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const platformCards = document.querySelectorAll('.platform-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            platformCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+            
+            // Login/Signup button functionality
+            const authButtons = document.querySelectorAll('.auth-btn');
+            authButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const action = this.textContent;
+                    alert(`${action} functionality would be implemented here`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
