@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <title>Dashboard | Planet Play</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="/Assets/image/logo/20240428_221650.png" rel="icon">
+    <link rel="apple-touch-icon" href="/Assets/image/logo/20240428_221650.png">
+    <link rel="stylesheet" href="/Assets/css/dashboard.css">
+    <link rel="stylesheet" href="/Assets/css/logo.css">
+    <link rel="stylesheet" href="/Assets/css/floating-bottun.css">
+    <style>
+   
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                 <span class="logo-icon"><img src="/Assets/image/logo/20240428_221650.png"></span>
+                    <h1>Planet Play</h1>
+                </div>
+                <div class="user-nav">
+                    <div class="user-info">
+                        <div class="user-avatar">JD</div>
+                        <div class="user-details">
+                            <h3>John Doe</h3>
+                            <p>Artist Account</p>
+                        </div>
+                    </div>
+                    <button class="logout-btn">Log Out</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard -->
+    <div class="container">
+        <div class="dashboard">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <ul class="sidebar-nav">
+                    <li><a href="#" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="#"><i class="fas fa-music"></i> My Music</a></li>
+                    <li><a href="#"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                    <li><a href="#"><i class="fas fa-wallet"></i> Earnings</a></li>
+                    <li><a href="#"><i class="fas fa-headphones"></i> Playlists</a></li>
+                    <li><a href="#"><i class="fas fa-bell"></i> Notifications</a></li>
+                    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li><a href="#"><i class="fas fa-question-circle"></i> Help & Support</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="dashboard-main">
+                <!-- Welcome Section -->
+                <section class="welcome-section">
+                    <h2>Welcome back, John!</h2>
+                    <p>Here's what's happening with your music today. You have 2 new playlist placements and your streams are up 15% this week.</p>
+                    
+                    <div class="quick-stats">
+                        <div class="stat-card">
+                            <div class="stat-value">24.5K</div>
+                            <div class="stat-label">Total Streams</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">$482</div>
+                            <div class="stat-label">Earnings This Month</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">8</div>
+                            <div class="stat-label">Active Playlists</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">+15%</div>
+                            <div class="stat-label">Stream Growth</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Recent Uploads Section -->
+                <section class="dashboard-section">
+                    <div class="section-header">
+                        <h3>Your Recent Music</h3>
+                        <div class="section-actions">
+                            <a href="#" class="btn">Upload New Track</a>
+                            <a href="#" class="btn btn-outline">View All</a>
+                        </div>
+                    </div>
+                    
+                    <div class="music-grid">
+                        <div class="music-card">
+                            <div class="music-cover">
+                                <i class="fas fa-play-circle"></i>
+                            </div>
+                            <div class="music-info">
+                                <h4>Midnight Dreams</h4>
+                                <p>Single • 2023</p>
+                                <div class="music-stats">
+                                    <span>12.4K streams</span>
+                                    <span>3 playlists</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="music-card">
+                            <div class="music-cover">
+                                <i class="fas fa-compact-disc"></i>
+                            </div>
+                            <div class="music-info">
+                                <h4>Electric Feelings</h4>
+                                <p>Album • 2023</p>
+                                <div class="music-stats">
+                                    <span>8.7K streams</span>
+                                    <span>5 playlists</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="music-card">
+                            <div class="music-cover">
+                                <i class="fas fa-headphones"></i>
+                            </div>
+                            <div class="music-info">
+                                <h4>Summer Vibes</h4>
+                                <p>Single • 2023</p>
+                                <div class="music-stats">
+                                    <span>3.4K streams</span>
+                                    <span>2 playlists</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Analytics Section -->
+                <section class="dashboard-section">
+                    <div class="section-header">
+                        <h3>Streaming Analytics</h3>
+                        <div class="section-actions">
+                            <a href="#" class="btn btn-outline">Last 7 Days</a>
+                            <a href="#" class="btn btn-outline">Last 30 Days</a>
+                        </div>
+                    </div>
+                    
+                    <div class="analytics-chart">
+                        <div class="chart-bar" style="height: 80%;">
+                            <div class="chart-bar-label">Mon</div>
+                        </div>
+                        <div class="chart-bar" style="height: 65%;">
+                            <div class="chart-bar-label">Tue</div>
+                        </div>
+                        <div class="chart-bar" style="height: 90%;">
+                            <div class="chart-bar-label">Wed</div>
+                        </div>
+                        <div class="chart-bar" style="height: 75%;">
+                            <div class="chart-bar-label">Thu</div>
+                        </div>
+                        <div class="chart-bar" style="height: 85%;">
+                            <div class="chart-bar-label">Fri</div>
+                        </div>
+                        <div class="chart-bar" style="height: 95%;">
+                            <div class="chart-bar-label">Sat</div>
+                        </div>
+                        <div class="chart-bar" style="height: 70%;">
+                            <div class="chart-bar-label">Sun</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Notifications Section -->
+                <section class="dashboard-section">
+                    <div class="section-header">
+                        <h3>Recent Notifications</h3>
+                        <div class="section-actions">
+                            <a href="#" class="btn btn-outline">View All</a>
+                        </div>
+                    </div>
+                    
+                    <ul class="notifications-list">
+                        <li class="notification-item">
+                            <div class="notification-icon">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <div class="notification-content">
+                                <h4>New Playlist Placement</h4>
+                                <p>Your track "Midnight Dreams" has been added to "Chill Vibes Only" playlist on Spotify.</p>
+                                <div class="notification-time">2 hours ago</div>
+                            </div>
+                        </li>
+                        
+                        <li class="notification-item">
+                            <div class="notification-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="notification-content">
+                                <h4>Streaming Milestone</h4>
+                                <p>Congratulations! You've reached 10,000 streams on your album "Electric Feelings".</p>
+                                <div class="notification-time">1 day ago</div>
+                            </div>
+                        </li>
+                        
+                        <li class="notification-item">
+                            <div class="notification-icon">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <div class="notification-content">
+                                <h4>Payment Processed</h4>
+                                <p>Your earnings for August have been processed and will be deposited within 3-5 business days.</p>
+                                <div class="notification-time">3 days ago</div>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Planet Play</h3>
+                    <p>Aggregating music across all platforms to deliver the perfect listening experience.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="platforms.html">Platforms</a></li>
+                        <li><a href="playlists.html">Playlists</a></li>
+                        <li><a href="artists.html">Artists</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Artist Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">API Documentation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li>Email: support@planetplay.com</li>
+                        <li>Phone: +1 (555) 123-4567</li>
+                        <li>Address: 123 Music Ave, Sound City</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Planet Play. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+        <div class="container">
+        
+    </div>
+    
+    <!-- Floating navigation bar -->
+<div class="cart-icon">
+    <div class="icon-box"><a href="/Assets/Subpage/submit.html">
+        <i class="fas fa-cloud-upload-alt"></i></a>
+    </div>
+    <div class="icon-box"><a href="/index.html">
+        <i class="fas fa-house"></i></a>
+    </div>
+    <div class="icon-box"><a href="/Assets/ backend/authentication/user-portal.html">
+        <i class="fas fa-user"></i></a>
+    </div>
+    <div class="icon-box"><a href="/Assets/pages/library/music-home.html">
+            <i class="fas fa-music"></i></a>
+    </div>
+</div>
+<div class="shadow-background"></div>
+
+
+    <script>
+        // Dashboard functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Logout button
+            const logoutBtn = document.querySelector('.logout-btn');
+            logoutBtn.addEventListener('click', function() {
+                if(confirm('Are you sure you want to log out?')) {
+                    // In a real application, this would clear the session and redirect
+                    alert('You have been logged out successfully.');
+                    window.location.href = 'index.html';
+                }
+            });
+            
+            // Sidebar navigation
+            const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links
+                    sidebarLinks.forEach(l => l.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // In a real application, this would load the appropriate content
+                    const sectionName = this.textContent.trim();
+                    alert(`Loading ${sectionName} section...`);
+                });
+            });
+            
+            // Upload button
+            const uploadBtn = document.querySelector('.btn');
+            uploadBtn.addEventListener('click', function(e) {
+                if(this.textContent.includes('Upload')) {
+                    e.preventDefault();
+                    alert('Opening music upload form...');
+                    // In a real application, this would open a modal or redirect to upload page
+                }
+            });
+            
+            // Music card click
+            const musicCards = document.querySelectorAll('.music-card');
+            musicCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const title = this.querySelector('h4').textContent;
+                    alert(`Opening details for: ${title}`);
+                    // In a real application, this would open a detailed view
+                });
+            });
+            
+            // Simulate real-time updates
+            setInterval(() => {
+                const streamValue = document.querySelector('.stat-value');
+                const currentStreams = parseInt(streamValue.textContent.replace('K', '000').replace('.', ''));
+                const newStreams = currentStreams + Math.floor(Math.random() * 10);
+                streamValue.textContent = (newStreams / 1000).toFixed(1) + 'K';
+            }, 10000);
+        });
+    </script>
+    <script src="/Assets/pageloader/loader-all-in-one.js"></script>
+</body>
+</html>

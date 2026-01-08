@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <title>Artist Portal | Planet Play</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="/Assets/image/logo/20240428_221650.png" rel="icon">
+    <link rel="apple-touch-icon" href="/Assets/image/logo/20240428_221650.png">
+    <link rel="stylesheet" href="/Assets/css/floating-bottun.css">
+    <link rel="stylesheet" href="/Assets/css/user-portal.css">
+    <link rel="stylesheet" href="/Assets/css/logo.css">
+    <style>
+    
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+       <div class="container">
+           <!-- <div class="auth-section"><a href="/Assets/ backend/authentication/user-portal.html">
+                <button class="auth-btn">Login</button>
+                <button class="auth-btn">Sign Up</button></a>
+            </div> -->
+            <div class="header-content">
+                <div class="logo">
+               <span class="logo-icon"><img src="/Assets/image/logo/20240428_221650.png"></span>
+                    <h1>Planet Play</h1>
+                </div>
+            <!--    <nav>
+                    <ul>
+                        <li><a href="/index.html" >Home</a></li>
+                        <li><a href="/Assets/Subpage/platforms.html">Platforms</a></li>
+                        <li><a href="/Assets/Subpage/playlist.html">Playlists</a></li>
+                        <li><a href="/Assets/Subpage/artist-lebel.html">Artists</a></li>
+                        <li><a href="/Assets/Subpage/contact.html">Contact</a></li>
+                    </ul>
+                </nav> -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Auth Container -->
+    <section class="auth-container">
+        <div class="container">
+            <div class="auth-box">
+                <div class="auth-tabs">
+                    <div class="auth-tab active" data-tab="login">Login</div>
+                    <div class="auth-tab" data-tab="signup">Sign Up</div>
+                </div>
+                
+                <!-- Login Form -->
+                <div class="auth-form active" id="login-form">
+                    <h2 class="form-title">Artist/Label Login</h2>
+                    
+                    <div class="social-login">
+                        <button class="social-btn">
+                            <i class="fab fa-google"></i>
+                            <span>Google</span>
+                        </button>
+                        <button class="social-btn">
+                            <i class="fab fa-apple"></i>
+                            <span>Apple</span>
+                        </button>
+                    </div>
+                    
+                    <div class="divider">
+                        <span>or</span>
+                    </div>
+                    
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="login-email">Email Address</label>
+                            <input type="email" id="login-email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="login-password">Password</label>
+                            <input type="password" id="login-password" name="password" required>
+                        </div>
+                        
+                        <div class="forgot-password">
+                            <a href="#">Forgot your password?</a>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn"><a href="/Assets/ backend/dashboard.html">Login to Your Account</a></button>
+                    </form>
+                    
+                    <div class="auth-footer">
+                        Don't have an account? <a href="#" class="switch-to-signup">Sign up here</a>
+                    </div>
+                </div>
+                
+                <!-- Signup Form -->
+                <div class="auth-form" id="signup-form">
+                    <h2 class="form-title">Artist/Label Sign Up</h2>
+                    
+                    <div class="social-login">
+                        <button class="social-btn">
+                            <i class="fab fa-google"></i>
+                            <span>Google</span>
+                        </button>
+                        <button class="social-btn">
+                            <i class="fab fa-apple"></i>
+                            <span>Apple</span>
+                        </button>
+                    </div>
+                    
+                    <div class="divider">
+                        <span>or</span>
+                    </div>
+                    
+                    <form id="signupForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="first-name">First Name</label>
+                                <input type="text" id="first-name" name="first-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="last-name">Last Name</label>
+                                <input type="text" id="last-name" name="last-name" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="signup-email">Email Address</label>
+                            <input type="email" id="signup-email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="artist-name">Artist / Band Name</label>
+                            <input type="text" id="artist-name" name="artist-name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="account-type">Account Type</label>
+                            <select id="account-type" name="account-type" required>
+                                <option value="">Select account type</option>
+                                <option value="solo-artist">Solo Artist</option>
+                                <option value="band">Band</option>
+                                <option value="record-label">Record Label</option>
+                                <option value="music-producer">Music Producer</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="primary-genre">Primary Genre</label>
+                            <select id="primary-genre" name="primary-genre" required>
+                                <option value="">Select your primary genre</option>
+                                <option value="pop">Pop</option>
+                                <option value="rock">Rock</option>
+                                <option value="hip-hop">Hip Hop</option>
+                                <option value="r&b">R&B</option>
+                                <option value="electronic">Electronic</option>
+                                <option value="jazz">Jazz</option>
+                                <option value="classical">Classical</option>
+                                <option value="country">Country</option>
+                                <option value="reggae">Reggae</option>
+                                <option value="afrobeats">Afrobeats</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="signup-password">Password</label>
+                                <input type="password" id="signup-password" name="password" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-password">Confirm Password</label>
+                                <input type="password" id="confirm-password" name="confirm-password" required>
+                            </div>
+                        </div>
+                        
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="terms" name="terms" required>
+                            <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                        </div>
+                        
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="newsletter" name="newsletter">
+                            <label for="newsletter">Send me updates about new features and opportunities</label>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn"><a href="/Assets/ backend/dashboard.html">Create Artist Account</a></button>
+                    </form>
+                    
+                    <div class="auth-footer">
+                        Already have an account? <a href="#" class="switch-to-login">Login here</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Artist Benefits Section -->
+    <section class="artist-benefits">
+        <div class="container">
+            <h2 class="section-title" style="text-align: center; margin-bottom: 50px; font-size: 36px; position: relative;">
+                Why Join Planet Play?
+                <div style="content: ''; display: block; width: 80px; height: 3px; background-color: var(--accent-green); margin: 15px auto;"></div>
+            </h2>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Global Distribution</h3>
+                    <p>Reach listeners on all major streaming platforms worldwide with a single upload.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Detailed Analytics</h3>
+                    <p>Track your performance across all platforms with comprehensive analytics and insights.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3>Maximize Revenue</h3>
+                    <p>Earn from all streaming platforms and optimize your revenue with our smart distribution.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-headphones"></i>
+                    </div>
+                    <h3>Playlist Placement</h3>
+                    <p>Get your music featured on curated playlists across all major streaming services.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Planet Play</h3>
+                    <p>Aggregating music across all platforms to deliver the perfect listening experience.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="platforms.html">Platforms</a></li>
+                        <li><a href="playlists.html">Playlists</a></li>
+                        <li><a href="artists.html">Artists</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+    <h3>Quick Links</h3>
+    <ul class="footer-links">
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/Assets/Subpage/platforms.html">Platforms</a></li>
+        <li><a href="/Assets/Subpage/playlist.html">Playlists</a></li>
+        <li><a href="/Assets/Subpage/artist-lebel.html">Artists</a></li>
+        <li><a href="/Assets/Subpage/contact.html">Contact</a></li>
+    </ul>
+</div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li>Email: planetplay.inc@gmail.com</li>
+                        <li>Phone: +234 9026394593</li>
+                     <!--   <li>Address: 123 Music Ave, Sound City</li> -->
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Colony core. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+        <div class="container">
+        
+    </div>
+    
+    <!-- Floating navigation bar -->
+<div class="cart-icon">
+    <div class="icon-box"><a href="/Assets/Subpage/submit.html">
+        <i class="fas fa-cloud-upload-alt"></i></a>
+    </div>
+    <div class="icon-box"><a href="/index.html">
+        <i class="fas fa-house"></i></a>
+    </div>
+    <div class="icon-box"><a href="/Assets/ backend/authentication/user-portal.html">
+        <i class="fas fa-user"></i></a>
+    </div>
+    <div class="icon-box"><a href="/Assets/pages/library/music-home.html">
+            <i class="fas fa-music"></i></a>
+    </div>
+</div>
+<div class="shadow-background"></div>
+
+
+    <script>
+        // Tab switching functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const authTabs = document.querySelectorAll('.auth-tab');
+            const authForms = document.querySelectorAll('.auth-form');
+            const switchToSignupLinks = document.querySelectorAll('.switch-to-signup');
+            const switchToLoginLinks = document.querySelectorAll('.switch-to-login');
+            
+            // Tab click event
+            authTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const targetTab = this.getAttribute('data-tab');
+                    
+                    // Update active tab
+                    authTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show corresponding form
+                    authForms.forEach(form => {
+                        form.classList.remove('active');
+                        if (form.id === `${targetTab}-form`) {
+                            form.classList.add('active');
+                        }
+                    });
+                });
+            });
+            
+            // Switch to signup from login footer
+            switchToSignupLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    authTabs.forEach(t => t.classList.remove('active'));
+                    document.querySelector('.auth-tab[data-tab="signup"]').classList.add('active');
+                    
+                    authForms.forEach(form => {
+                        form.classList.remove('active');
+                        if (form.id === 'signup-form') {
+                            form.classList.add('active');
+                        }
+                    });
+                });
+            });
+            
+            // Switch to login from signup footer
+            switchToLoginLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    authTabs.forEach(t => t.classList.remove('active'));
+                    document.querySelector('.auth-tab[data-tab="login"]').classList.add('active');
+                    
+                    authForms.forEach(form => {
+                        form.classList.remove('active');
+                        if (form.id === 'login-form') {
+                            form.classList.add('active');
+                        }
+                    });
+                });
+            });
+            
+            // Form submission
+            const loginForm = document.getElementById('loginForm');
+            const signupForm = document.getElementById('signupForm');
+            
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const formData = new FormData(loginForm);
+                const formObject = {};
+                formData.forEach((value, key) => {
+                    formObject[key] = value;
+                });
+                
+                // In a real application, you would send this data to a server
+                console.log('Login form submitted:', formObject);
+                
+                // Show success message
+                alert('Login successful! Redirecting to your artist dashboard...');
+                
+                // In a real application, you would redirect to the dashboard
+                // window.location.href = 'artist-dashboard.html';
+            });
+            
+            signupForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const formData = new FormData(signupForm);
+                const formObject = {};
+                formData.forEach((value, key) => {
+                    formObject[key] = value;
+                });
+                
+                // Check if passwords match
+                const password = document.getElementById('signup-password').value;
+                const confirmPassword = document.getElementById('confirm-password').value;
+                
+                if (password !== confirmPassword) {
+                    alert('Passwords do not match. Please try again.');
+                    return;
+                }
+                
+                // In a real application, you would send this data to a server
+                console.log('Signup form submitted:', formObject);
+                
+                // Show success message
+                alert('Account created successfully! Welcome to Planet Play. You can now submit your music.');
+                
+                // In a real application, you would redirect to the dashboard or submission page
+                // window.location.href = 'submit-music.html';
+            });
+            
+            // Social login buttons
+            const socialButtons = document.querySelectorAll('.social-btn');
+            socialButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const platform = this.querySelector('span').textContent;
+                    alert(`${platform} authentication would be implemented here`);
+                });
+            });
+        });
+    </script>
+    <script src="/Assets/pageloader/loader-all-in-one.js"></script>
+</body>
+</html>
